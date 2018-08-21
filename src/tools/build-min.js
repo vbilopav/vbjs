@@ -1,6 +1,7 @@
 const uglifyEs = require("uglify-es");
 const fs = require("fs");
 const path = require("path");
+const cleanPath = name => name.replace(/[\\/]/g, path.sep)
 
 const 
     walkSync = function (dir, pathnames, filelist) {
@@ -56,21 +57,23 @@ const
         }, initDir);
     };
 
+
 const 
-    sourceDir = "../vbjs/dev/",
-    targetDir = "../vbjs/min/";
+    sourceDir = cleanPath("../vbjs/dev/"),
+    targetDir = cleanPath("../vbjs/min/");
+
 
 console.log(`>>> Removing target dir ${targetDir}`);
 rmdirSync(targetDir);
 
-console.log(`>>> Walking trough source dir ${sourceDir}`);
 const
     fileListObjects = walkSync(sourceDir);
 
 for (let item of fileListObjects) {
-    let dirName = item.dir.replace(sourceDir, targetDir);
-        fileName = item.full.replace(sourceDir, targetDir);
-    
+    let dirName = cleanPath(item.dir).replace(sourceDir, targetDir),
+        fileName = cleanPath(item.full).replace(sourceDir, targetDir);
+
+    console.log(`>>> ${item.full} ...`);
     mkDirByPathSync(dirName);
     console.log(`>>> Minifying ${item.full} ...`);
     let content = uglifyEs.minify(fs.readFileSync(item.full).toString(), null);
@@ -78,4 +81,3 @@ for (let item of fileListObjects) {
     console.log(`>>> Writting ${fileName} ...`);
     fs.writeFileSync(fileName, content.code, "utf8");
 }
-
