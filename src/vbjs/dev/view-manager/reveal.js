@@ -6,7 +6,10 @@ define(["sys/view-manager/utils"], utils => ({
     elementOrId=(()=>{throw elementOrId})()
 }) => new Promise(resolve => {
 
-    let viewName, modules;
+    const 
+        app = window[requirejs.s.contexts._.config.__appObjName];
+    let 
+        viewName, modules;
     if (typeof view === "string") {
         viewName = view;
         modules = [view]
@@ -75,7 +78,7 @@ define(["sys/view-manager/utils"], utils => ({
 
         let contentFunc = c => {
             if (typeof c === "function" || c instanceof Array) {
-                c = _app.parse(...c);
+                c = app.parse(...c);
                 c.then(s => {
                     if (typeof s === "string") {
                         element.html(s);
@@ -97,7 +100,7 @@ define(["sys/view-manager/utils"], utils => ({
         if (type === utils.types.class) {
             let content = data.instance.render({params: params, element: element});
             if (typeof content === "function" || content instanceof Array) {
-                content = _app.parse(...content);
+                content = app.parse(...content);
             }
             if (content instanceof Promise) {
                 return content.then(s => {

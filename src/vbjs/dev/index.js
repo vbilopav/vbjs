@@ -8,7 +8,8 @@
             libsUrl: "libs",
             sysPath: "vbjs",
             appModule: "sys/single-view-app",
-            appElementId: "app"
+            appElementId: "app",
+            appObjectName: "_vbjs",
         }
         
     const
@@ -22,10 +23,11 @@
         appModule = scr.getAttribute("data-app-module") === null ? defaults.appModule : scr.getAttribute("data-app-module"),
         viewModule = scr.getAttribute("data-view-module"),
         appElementId = scr.getAttribute("data-app-container-id") || defaults.appElementId,
-        settings = eval("(" + scr.getAttribute("data-settings") + ")") || "{usePreloadedTemplates: false}",
+        appObjectName = scr.getAttribute("data-app-object-name") || defaults.appObjectName,
+        settings = eval("(" + scr.getAttribute("data-settings") + ")") || {usePreloadedTemplates: false},
         sysUrl = "../" + sysPath;
 
-    window._app = {
+    window[appObjectName] = {
         dev: dev, 
         version: version, 
         appUrl: appUrl, 
@@ -40,9 +42,9 @@
         }
     };
     
-    window.require = {baseUrl: _app.appUrl};
-    if (window._app.version) {
-        window.require.urlArgs = "v=" + window._app.version;
+    window.require = {baseUrl: window[appObjectName].appUrl};
+    if (window[appObjectName].version) {
+        window.require.urlArgs = "v=" + window[appObjectName].version;
     }
 
     const
@@ -72,6 +74,7 @@
         },
         configure = () => {
             window.requirejs.config({
+                __appObjName: appObjectName,
                 paths: {
                     libs: libsUrl ? "../" + libsUrl : "../libs",
                     text: ["https://cdnjs.cloudflare.com/ajax/libs/require-text/2.0.12/text.min", "libs/text"],

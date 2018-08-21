@@ -1,6 +1,9 @@
 define(["sys/template/helpers", "sys/template/import"], (helpers, importParser) => {
 
-    _app.template = (pieces, ...subs) => {
+    const 
+        app = window[requirejs.s.contexts._.config.__appObjName];
+
+    app.template = (pieces, ...subs) => {
         let promises = [];
         for(let i = 0, l = subs.length; i < l; i++) {
             let sub = subs[i];
@@ -36,7 +39,7 @@ define(["sys/template/helpers", "sys/template/import"], (helpers, importParser) 
         })();
     };
 
-    _app.composite = (_, ...subs) => subs;
+    app.composite = (_, ...subs) => subs;
 
     const
         prepareTemplate = (data, name, locale) => {
@@ -52,11 +55,11 @@ define(["sys/template/helpers", "sys/template/import"], (helpers, importParser) 
             return data;
         },
         parseTemplate = (text, data, locale, name) => 
-            new Function("return _app.template`" + text + "`;").call(prepareTemplate(data, name, locale)),
+            new Function("return " + app + ".template`" + text + "`;").call(prepareTemplate(data, name, locale)),
         parseComposite = (text, data, locale, name) => 
-            new Function("return _app.composite`" + text + "`;").call(prepareTemplate(data, name, locale));
+            new Function("return " + app + ".composite`" + text + "`;").call(prepareTemplate(data, name, locale));
 
-    _app.parse = async (template, data, locale, name) => {
+    app.parse = async (template, data, locale, name) => {
         let text;
         if (typeof template === "string") {
             text = template;

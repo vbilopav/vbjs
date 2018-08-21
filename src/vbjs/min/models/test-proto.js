@@ -1,0 +1,1 @@
+define([],()=>(r,e,o=!0)=>{for(let i of e)if(void 0!==r.prototype[i]){if(o)throw new Error(`Error: Name collision - object ${r} already have defined "${i}" !`);return!1}return!0});

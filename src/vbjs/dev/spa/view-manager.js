@@ -23,6 +23,7 @@ define(["sys/view-manager/utils", "sys/view-manager/reveal"], (utils, reveal) =>
 
     async reveal({id="", view=(()=>{throw view})(), params={}, uri=""}) {
         params = await utils.prepareParams(params);
+        let app = window[requirejs.s.contexts._.config.__appObjName];
         await new Promise((resolve, reject) => {
             let found = this._views[id],
                 uriHash = uri.hashCode(),
@@ -97,7 +98,7 @@ define(["sys/view-manager/utils", "sys/view-manager/reveal"], (utils, reveal) =>
 
                         let updateFunc = c => {
                             if (typeof c === "function" || c instanceof Array) {
-                                c = _app.parse(...c);
+                                c = app.parse(...c);
                                 c.then(s => {
                                     if (typeof s === "string") {
                                         element.html(s).show();
@@ -127,10 +128,10 @@ define(["sys/view-manager/utils", "sys/view-manager/reveal"], (utils, reveal) =>
                         }
 
                         if (typeof newContent === "function") {
-                            newContent = _app.parse(newContent);
+                            newContent = app.parse(newContent);
                         }
                         if (newContent instanceof Array) {
-                            newContent = _app.parse(...newContent);
+                            newContent = app.parse(...newContent);
                         }
 
                         if (newContent instanceof Promise) {

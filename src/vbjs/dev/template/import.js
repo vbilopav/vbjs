@@ -1,7 +1,8 @@
 define([], () => {
 
     const
-        preloaded = ((window._app  && window._app.settings) ? (window._app.settings.usePreloadedTemplates == true) : false),
+        app = window[requirejs.s.contexts._.config.__appObjName],
+        preloaded = app.settings.usePreloadedTemplates == true,
         searchImport = ".import(",
         searchImportLen = searchImport.length,
         parseImportsAsync = text => new Promise(resolve => {

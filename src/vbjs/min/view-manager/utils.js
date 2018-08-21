@@ -1,0 +1,1 @@
+define([],()=>{const e={template:1,class:2,string:3};return{getId:e=>"_view"+e,types:e,getViewType:(t,n)=>{let r=typeof t;if("function"===r)return(e=>-1!==e.indexOf("template!"))(n)?e.template:e.class;if("string"===r)return e.string;throw new Error("unknown view type "+t)},showView:e=>{window.scrollTo(e.x,e.y)},prepareParams:async e=>e instanceof Promise?await e:e}});

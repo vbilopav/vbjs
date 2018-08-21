@@ -1,0 +1,1 @@
+define(["sys/models/test-proto","extension-Element/css"],e=>{e(HTMLElement,["hide"]),HTMLElement.prototype.hide=function(){return this.css("display","none"),this}});

@@ -1,0 +1,1 @@
+define(["sys/models/test-proto"],s=>{s(HTMLElement,["addClass"]),HTMLElement.prototype.addClass=function(s){return this.classList?this.classList.add(s):this.className+=` ${s}`,this}});

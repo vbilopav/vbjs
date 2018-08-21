@@ -1,0 +1,1 @@
+define(["sys/models/test-proto"],e=>{e(String,["toCamelCase"]),String.prototype.toCamelCase=function(){return this.replace(/-([a-z])/g,e=>e[1].toUpperCase())}});

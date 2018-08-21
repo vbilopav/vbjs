@@ -1,0 +1,1 @@
+define(["sys/models/test-proto"],t=>{t(HTMLElement,["html"]),HTMLElement.prototype.html=function(t){return void 0===t?this.innerHTML:(this.innerHTML=t,this)}});

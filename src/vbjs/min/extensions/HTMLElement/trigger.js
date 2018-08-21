@@ -1,0 +1,1 @@
+define(["sys/models/test-proto"],t=>{t(HTMLElement,["trigger"]),HTMLElement.prototype.trigger=function(t){for(let e of t.split(" "))this.dispatchEvent(new Event(e));return this}});
