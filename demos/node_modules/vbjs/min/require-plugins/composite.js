@@ -1,0 +1,1 @@
+define(["module","sys/template/parser","sys/template/import"],(e,s,t)=>({version:"1.0.0",load(e,p,o){p(["text!"+e],p=>t.parseImportsAsync(p).then(()=>o((t,o)=>s.parseComposite(p,t,o,e))))}}));

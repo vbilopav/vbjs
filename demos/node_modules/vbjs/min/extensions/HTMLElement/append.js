@@ -1,0 +1,1 @@
+define(["sys/models/test-proto"],e=>{e(HTMLElement,["append"],!1)||(HTMLElement.prototype.append=function(e){return e.appendChild(this),this})});

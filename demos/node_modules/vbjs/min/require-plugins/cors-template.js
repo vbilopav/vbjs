@@ -1,0 +1,1 @@
+define(["module","sys/template/parser","sys/template/import"],(e,t,s)=>({version:"1.0.0",load(e,p,r){fetch(e,{mode:"cors"}).then(e=>e.text()).then(p=>s.parseImportsAsync(p).then(()=>r((s,p)=>t.parseTemplate(text,s,p,e))))}}));

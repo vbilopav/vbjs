@@ -1,0 +1,1 @@
+define(["sys/models/test-proto"],e=>{e(HTMLElement,["overflownY"]),HTMLElement.prototype.overflownY=function(){return this.scrollHeight>this.clientHeight}});
