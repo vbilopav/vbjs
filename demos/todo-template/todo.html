@@ -20,8 +20,7 @@ ${
 </div>
 
 ${() => this.template.rendered = element => {
-        let model = new _vbjs.Model().bind(element, {
-            createNewToDoItem: () => model.content.append(this.item(model.input.value).toHTML())
-        });
-    }
-}
+    let model = new _vbjs.Model().bind(element, {
+        createNewToDoItem: () => model.content.append(this.item(model.input.value).toHTML())
+    });
+}}
