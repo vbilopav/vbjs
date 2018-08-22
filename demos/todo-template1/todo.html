@@ -1,8 +1,8 @@
-${this.template.css.import("todo-template/todo.css", "todo-template/todo-item.css")}
+${this.template.css.import("todo-template1/todo.css", "todo-template1/components/todo-item.css")}
 
 ${
     (() => {
-        [this.item] = this.template.import("composite!todo-template/todo-item.html")();
+        [this.item] = this.template.import("composite!todo-template1/components/todo-item.html")();
         this.list = ["clean the house", "buy milk"];
         this.value = "";
     })()
@@ -19,8 +19,10 @@ ${
     </div>
 </div>
 
-${() => this.template.rendered = element => {
-    let model = new _vbjs.Model().bind(element, {
-        createNewToDoItem: () => model.content.append(this.item(model.input.value).toHTML())
-    });
-}}
+${
+    () => this.template.rendered = element => {
+        let model = new _vbjs.Model().bind(element, {
+            createNewToDoItem: () => model.content.append(this.item(model.input.value).toHTML())
+        });
+    }
+}

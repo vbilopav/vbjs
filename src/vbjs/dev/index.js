@@ -6,8 +6,6 @@
             appUrl: "app",
             cssUrl: "css",
             libsUrl: "libs",
-            sysPath: "../vbjs",
-            sysUrl: "vbjs",
             appModule: "sys/single-view-app",
             appElementId: "app",
             appObjectName: "_vbjs",
@@ -20,21 +18,20 @@
         appUrl = scr.getAttribute("data-app-url") === null ? defaults.appUrl : scr.getAttribute("data-app-url"),
         cssUrl = scr.getAttribute("data-css-url") === null ? defaults.cssUrl : scr.getAttribute("data-css-url"),
         libsUrl = scr.getAttribute("data-libs-url") === null ? defaults.libsUrl : scr.getAttribute("data-libs-url"),
-        sysUrl = scr.getAttribute("data-sys-url") === null ? defaults.sysUrl : scr.getAttribute("data-sys-url"),
-        sysPath = scr.getAttribute("data-sys-path") === null ? defaults.sysPath : scr.getAttribute("data-sys-path"),
+        sysUrl = scr.getAttribute("src").replace("index.js", ""),
         appModule = scr.getAttribute("data-app-module") === null ? defaults.appModule : scr.getAttribute("data-app-module"),
         viewModule = scr.getAttribute("data-view-module"),
         appElementId = scr.getAttribute("data-app-container-id") || defaults.appElementId,
         appObjectName = scr.getAttribute("data-app-object-name") || defaults.appObjectName,
-        settings = eval("(" + scr.getAttribute("data-settings") + ")") || {usePreloadedTemplates: false};
+        settings = eval("(" + scr.getAttribute("data-settings") + ")") || {usePreloadedTemplates: false},
+        cssFilesattrValue = scr.getAttribute("data-css-files");
 
     window[appObjectName] = {
-        dev: dev, 
-        version: version, 
-        appUrl: appUrl, 
-        cssUrl: cssUrl, 
-        libsUrl: libsUrl, 
-        sysPath: sysPath, 
+        dev: dev,
+        version: version,
+        appUrl: appUrl,
+        cssUrl: cssUrl,
+        libsUrl: libsUrl,
         sysUrl: sysUrl,
         settings: settings,
         config: {
@@ -43,6 +40,39 @@
             elementId: appElementId
         }
     };
+
+    const 
+        relative = function(from, to) {
+            from = (from[0] === '/' || from[0] === '.' ? from : '/' + from);
+            to = (to[0] === '/' || to[0] === '.' ? to : '/' + to);
+            const
+                lowerFrom = from.toLowerCase(),
+                lowerTo = to.toLowerCase(),
+                toParts = to.split('/'),
+                lowerFromParts = lowerFrom.split('/'),
+                lowerToParts = lowerTo.split('/');
+                length = Math.min(lowerFromParts.length, lowerToParts.length),
+                samePartsLength = length;
+            for (var i = 0; i < length; i++) {
+                if (lowerFromParts[i] !== lowerToParts[i]) {
+                    samePartsLength = i;
+                    break;
+                }
+            }
+            if (samePartsLength == 0) {
+                return to;
+            }
+            var outputParts = [];
+            for (var i = samePartsLength; i < lowerFromParts.length; i++) {
+                outputParts.push('..');
+            }
+            outputParts = outputParts.concat(toParts.slice(samePartsLength));      
+            return outputParts.join('/');
+        };
+
+    const 
+        sysPath = relative(appUrl, sysUrl),
+        libsPath = relative(appUrl, libsUrl);
     
     window.require = {baseUrl: window[appObjectName].appUrl};
     if (window[appObjectName].version) {
@@ -50,8 +80,7 @@
     }
 
     const
-        attrValue = scr.getAttribute("data-css-files"),
-        cssFiles = attrValue !== null ? eval("[" + attrValue + "]") : [];
+        cssFiles = cssFilesattrValue !== null ? eval("[" + cssFilesattrValue + "]") : [];
         
     if (cssFiles.length) {
         for (let i=0, l=cssFiles.length; i<l; i++) {
@@ -69,7 +98,7 @@
             let script = document.createElement("script");
             script.async = true;
             script.src = src;
-            script.setAttribute("data-main", sysUrl + "/main.js")
+            script.setAttribute("data-main", sysPath + "/main.js")
             document.body.appendChild(script);
             script.onload = onload;
             script.onerror = onload;
@@ -78,16 +107,16 @@
             window.requirejs.config({
                 __appObjName: appObjectName,
                 paths: {
-                    libs: libsUrl ? "../" + libsUrl : "../libs",
+                    libs: libsPath,
                     text: ["https://cdnjs.cloudflare.com/ajax/libs/require-text/2.0.12/text.min", "libs/text"],
                     sys: sysPath,
-                    "template": sysUrl + "/require-plugins/template",
-                    "composite": sysUrl + "/require-plugins/composite",
-                    "cors-text": sysUrl + "/require-plugins/cors-text",
-                    "cors-template": sysUrl + "/require-plugins/cors-template",
-                    "extension-Element": sysUrl + "/extensions/HTMLElement",
-                    "extension-String": sysUrl + "/extensions/String",
-                    "extension": sysUrl + "/require-plugins/extension"
+                    "template": sysPath + "/require-plugins/template",
+                    "composite": sysPath + "/require-plugins/composite",
+                    "cors-text": sysPath + "/require-plugins/cors-text",
+                    "cors-template": sysPath + "/require-plugins/cors-template",
+                    "extension-Element": sysPath + "/extensions/HTMLElement",
+                    "extension-String": sysPath + "/extensions/String",
+                    "extension": sysPath + "/require-plugins/extension"
                 }
             });
         }
