@@ -73,7 +73,6 @@ for (let item of fileListObjects) {
     let dirName = cleanPath(item.dir).replace(sourceDir, targetDir),
         fileName = cleanPath(item.full).replace(sourceDir, targetDir);
 
-    console.log(`>>> ${item.full} ...`);
     mkDirByPathSync(dirName);
     console.log(`>>> Minifying ${item.full} ...`);
     let content = uglifyEs.minify(fs.readFileSync(item.full).toString(), null);

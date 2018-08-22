@@ -1,0 +1,27 @@
+${this.template.css.import("todo-template1/todo.css", "todo-template1/components/todo-item.css")}
+
+${
+    (() => {
+        [this.item] = this.template.import("composite!todo-template1/components/todo-item.html")();
+        this.value = "";
+    })()
+}
+
+<div class="ToDo">
+    <h1 class="ToDo-Header">VB SPA template To Do</h1>
+    <div class="ToDo-Container">
+        <div class="ToDo-Content" id="content">
+            ${async () => this.template.forEach(await(await fetch("../shared/todo.json")).json(), item => this.item(item))}
+        </div>
+        <input type="text" id="input" value="${this.value}" />
+        <div class="ToDo-Add" onclick="createNewToDoItem">+</div>
+    </div>
+</div>
+
+${
+    () => this.template.rendered = element => {
+        let model = new _vbjs.Model().bind(element, {
+            createNewToDoItem: () => model.content.append(this.item(model.input.value).toHTML())
+        });
+    }
+}

@@ -34,7 +34,7 @@ define(["sys/template/helpers", "sys/template/import"], (helpers, importParser) 
                     }
                     sub = result === undefined || typeof result === "function" ? "" : result;
                 }
-                subs[promise.index] = sub;
+                subs[promise.index] = sub === undefined ? "" : sub;
             }
             return String.raw(pieces, ...subs);
         })();
