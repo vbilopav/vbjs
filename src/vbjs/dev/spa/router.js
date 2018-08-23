@@ -78,7 +78,7 @@ define([], () => class {
 
     _onChangeEvent(event={newHash: document.location.hash}, starting=false) {
         if (!event.newHash && event.newURL) {
-            event.newHash = event.newURL.replace(document.location.origin + "/", "");
+            event.newHash = event.newURL.replace(document.location.origin + document.location.pathname, "");
         }
         let name,
             uri = event.newHash.replace(this._hash, ""),

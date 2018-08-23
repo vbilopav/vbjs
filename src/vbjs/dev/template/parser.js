@@ -70,7 +70,7 @@ define(["sys/template/helpers", "sys/template/import"], (helpers, importParser) 
             if (index === -1) {
                 throw new Error("Invalid template");
             }
-            text =  text.substring(index+1, text.indexOf("`", index+1));
+            text =  text.substring(index+1, text.lastIndexOf("`"));
         }
         await importParser.parseImportsAsync(text);
         return await parseTemplate(text, data, locale, name);

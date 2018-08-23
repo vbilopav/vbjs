@@ -26,7 +26,7 @@ define(["sys/view-manager/utils"], utils => ({
     }
     
     require(modules, (view, ...injected) => {
-        let uriHash = uri;
+        let uriHash = uri.hashCode();
         let type = utils.getViewType(view, viewName),
             element = (typeof elementOrId === "string" ? "span".createElement(elementOrId) : elementOrId),
             data = {type: type, uriHash: uriHash, x: 0, y: 0, id: id};
@@ -100,7 +100,11 @@ define(["sys/view-manager/utils"], utils => ({
         if (type === utils.types.class) {
             let content = data.instance.render({params: params, element: element});
             if (typeof content === "function" || content instanceof Array) {
-                content = app.parse(...content);
+                if (typeof content === "function") {
+                    content = app.parse(content);
+                } else {
+                    content = app.parse(...content);
+                }
             }
             if (content instanceof Promise) {
                 return content.then(s => {
