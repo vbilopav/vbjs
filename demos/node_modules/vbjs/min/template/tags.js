@@ -1,0 +1,1 @@
+define([],()=>({parse:i=>i.split(/<script>/).join("").split(/<\/script>/).join("")}));

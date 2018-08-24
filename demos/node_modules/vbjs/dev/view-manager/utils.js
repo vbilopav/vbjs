@@ -31,6 +31,11 @@ define([], () => {
             if (params instanceof Promise) {
                 return await params
             }
+            if (typeof params !== "object") {
+                params = {
+                    value: params
+                }
+            }
             return params
         }
     }

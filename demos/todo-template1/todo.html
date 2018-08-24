@@ -1,11 +1,13 @@
 ${this.template.css.import("todo-template1/todo.css", "todo-template1/components/todo-item.css")}
 
 ${
+<script>
     (() => {
         [this.item] = this.template.import("composite!todo-template1/components/todo-item.html")();
         this.list = ["clean the house", "buy milk"];
         this.value = "";
     })()
+</script>
 }
 
 <div class="ToDo">
@@ -20,9 +22,11 @@ ${
 </div>
 
 ${
+<script>
     () => this.template.rendered = element => {
         let model = new _vbjs.Model().bind(element, {
             createNewToDoItem: () => model.content.append(this.item(model.input.value).toHTML())
         });
     }
+</script>
 }
