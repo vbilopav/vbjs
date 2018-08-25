@@ -10,7 +10,7 @@ define(
                 {
                     view: app.config.view, 
                     elementOrId: document.getElementById(id).html(""),
-                    params: parseQueryString(document.location.search)
+                    params: document.location.search ? parseQueryString(document.location.search) : {}
                 });
         }
 );
