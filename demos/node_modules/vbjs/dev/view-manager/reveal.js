@@ -1,4 +1,4 @@
-define(["sys/view-manager/utils"], utils => ({
+define(["sys/view-manager/utils", "sys/app"], (utils, app) => ({
     id="", 
     view=(()=>{throw view})(), 
     params={}, 
@@ -6,8 +6,6 @@ define(["sys/view-manager/utils"], utils => ({
     elementOrId=(()=>{throw elementOrId})()
 }) => new Promise(resolve => {
 
-    const 
-        app = window[requirejs.s.contexts._.config.__appObjName];
     let 
         viewName, modules;
     if (typeof view === "string") {

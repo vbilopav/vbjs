@@ -2,7 +2,7 @@ define([], () => class {
 
     constructor() {
         this.username = "vbilopav"; // default value for the model element username
-        this.model = new _vbjs.Model();
+        this.model = new _app.Model();
     }
 
     render() {

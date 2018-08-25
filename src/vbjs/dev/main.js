@@ -1,4 +1,5 @@
 define([
+    "sys/app",
     "sys/models/model",
     "extension-Element/find",
     "extension-Element/forEachChild",
@@ -14,9 +15,9 @@ define([
     "extension-Element/addClass",
     "extension-Element/removeClass",
     "sys/template/parser"
-], Model => {
 
-    let _app = window[requirejs.s.contexts._.config.__appObjName];
+], (_app, Model) => {
+
     _app.Model = Model;
     _app.import = m => new Promise(resolve => require(m, r => resolve(r)));
     require([_app.config.module], app => app(_app.config.elementId));

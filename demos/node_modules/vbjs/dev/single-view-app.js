@@ -1,9 +1,9 @@
 define(
-    ["sys/view-manager/reveal"], reveal => 
+    ["sys/app", "sys/view-manager/reveal"], (app, reveal) => 
         id => 
             reveal(
                 {
-                    view: window[requirejs.s.contexts._.config.__appObjName].config.view, 
+                    view: app.config.view, 
                     elementOrId: document.getElementById(id).html("")
                 })
 );

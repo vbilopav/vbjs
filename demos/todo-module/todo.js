@@ -3,7 +3,7 @@ define(["todo-module/components/todo-item"], Item => class {
     constructor() {
         this.item = new Item();
         this.value = "";
-        this.model = new _vbjs.Model();
+        this.model = new _app.Model();
     }
 
     render() {

@@ -6,7 +6,7 @@
 ${
     <script>
     () => this.template.rendered = element => {
-        let model = new _vbjs.Model().bind(element, {
+        let model = new _app.Model().bind(element, {
             username: "vbilopav", // default value
             showClick: () => window.location = "#/github-user-info/" + model.username.value
         });

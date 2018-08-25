@@ -1,1 +1,1 @@
-define(["sys/view-manager/reveal"],e=>n=>e({view:window[requirejs.s.contexts._.config.__appObjName].config.view,elementOrId:document.getElementById(n).html("")}));
+define(["sys/app","sys/view-manager/reveal"],(e,n)=>i=>n({view:e.config.view,elementOrId:document.getElementById(i).html("")}));

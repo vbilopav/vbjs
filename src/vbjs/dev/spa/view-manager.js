@@ -1,4 +1,8 @@
-define(["sys/view-manager/utils", "sys/view-manager/reveal"], (utils, reveal) => class {
+define([
+    "sys/view-manager/utils", 
+    "sys/view-manager/reveal",
+    "sys/app"
+], (utils, reveal, app) => class {
 
     constructor(
         container=(()=>{throw container})()
@@ -23,7 +27,6 @@ define(["sys/view-manager/utils", "sys/view-manager/reveal"], (utils, reveal) =>
 
     async reveal({id="", view=(()=>{throw view})(), params={}, uri=""}) {
         params = await utils.prepareParams(params);
-        let app = window[requirejs.s.contexts._.config.__appObjName];
         await new Promise((resolve, reject) => {
             let found = this._views[id],
                 uriHash = uri.hashCode(),

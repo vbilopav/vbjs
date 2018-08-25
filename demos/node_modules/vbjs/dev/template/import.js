@@ -1,7 +1,6 @@
-define([], () => {
+define(["sys/app"], app => {
 
     const
-        app = window[requirejs.s.contexts._.config.__appObjName],
         preloaded = app.settings.usePreloadedTemplates == true,
         searchImport = ".import(",
         searchImportLen = searchImport.length,

@@ -1,16 +1,12 @@
 define([
     "sys/template/helpers", 
     "sys/template/import",
-    "sys/template/tags"
+    "sys/app"
 ], (
     helpers, 
     importParser,
-    tagsParser
+    app
 ) => {
-
-    const
-        appName = requirejs.s.contexts._.config.__appObjName,
-        app = window[appName];
 
     app.template = (pieces, ...subs) => {
         let promises = [];
@@ -64,9 +60,9 @@ define([
             return data;
         },
         parseTemplate = (text, data, locale, name) => 
-            new Function("return " + appName + ".template`" + tagsParser.parse(text) + "`;").call(prepareTemplate(data, name, locale)),
+            new Function("return " + app.config.name + ".template`" + text + "`;").call(prepareTemplate(data, name, locale)),
         parseComposite = (text, data, locale, name) => 
-            new Function("return " + appName + ".composite`" + tagsParser.parse(text) + "`;").call(prepareTemplate(data, name, locale));
+            new Function("return " + app.config.name + ".composite`" + text + "`;").call(prepareTemplate(data, name, locale));
 
     app.parse = async (template, data, locale, name) => {
         let text;

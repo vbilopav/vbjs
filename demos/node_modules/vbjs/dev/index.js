@@ -8,7 +8,7 @@
             libsUrl: "libs",
             appModule: "sys/single-view-app",
             appElementId: "app",
-            appObjectName: "_vbjs",
+            appObjectName: "_app",
         }
         
     const
@@ -23,7 +23,7 @@
         viewModule = scr.getAttribute("data-view-module"),
         appElementId = scr.getAttribute("data-app-container-id") || defaults.appElementId,
         appObjectName = scr.getAttribute("data-app-object-name") || defaults.appObjectName,
-        settings = eval("(" + scr.getAttribute("data-settings") + ")") || {usePreloadedTemplates: false},
+        settings = eval("(" + scr.getAttribute("data-settings") + ")") || {usePreloadedTemplates: false, stripScriptTagsInTemplates: true},
         cssFilesattrValue = scr.getAttribute("data-css-files");
 
     window[appObjectName] = {
@@ -37,7 +37,8 @@
         config: {
             module: appModule,
             view: viewModule,
-            elementId: appElementId
+            elementId: appElementId,
+            name: appObjectName
         }
     };
 
