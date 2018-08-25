@@ -1,1 +1,1 @@
-define(["sys/app","sys/view-manager/reveal"],(e,n)=>i=>n({view:e.config.view,elementOrId:document.getElementById(i).html("")}));
+define(["sys/app","sys/view-manager/reveal"],(e,n)=>a=>{return n({view:e.config.view,elementOrId:document.getElementById(a).html(""),params:(e=>e.slice(e.indexOf("?")+1).match(/[\w\d%\-!.~'()\*]+=[\w\d%\-!.~'()\*]+/g).map(e=>e.split("=").map(decodeURIComponent)).reduce((e,[n,a])=>Object.assign(e,{[n]:a}),{}))(document.location.search)})});
