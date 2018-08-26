@@ -1,15 +1,13 @@
 <div class="container-fluid">
     <h3>Github user data</h3>
     <input type="text" name="username">
-    <button name="show" onclick="showClick">Show github user data</button>
+    <button onclick="showClick">Show github user data</button>
 </div>
 ${
     <script>
-    () => this.template.rendered = element => {
-        let model = new _app.Model().bind(element, {
-            username: "vbilopav", // default value
-            showClick: () => window.location = "#/github-user-info/" + model.username.value
-        });
+    this.template.context = {
+        username: "vbilopav", // default value
+        showClick: () => window.location = "#/github-user-info/" + this.template.model.username.value
     }
     </script>
 }
