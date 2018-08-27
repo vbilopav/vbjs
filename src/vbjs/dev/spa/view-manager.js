@@ -54,10 +54,10 @@ define([
                         let result = found.instance(params);
                         if (typeof result === "string") {
                             element.html(result);
-                            params.___rendered(element);
+                            utils.templateRendered(params, element);
                         } else if (result instanceof HTMLElement) {
                             element.html("").append(result);
-                            params.___rendered(element);
+                            utils.templateRendered(params, element);
                         } else if (result instanceof Promise) {
                             result.then(r => {
                                 if (typeof r === "string") {
@@ -65,7 +65,7 @@ define([
                                 } else {
                                     element.html("").append(r);
                                 }
-                                params.___rendered(element);
+                                utils.templateRendered(params, element);
                             });
                         }
                     }
@@ -108,11 +108,7 @@ define([
                                     } else {
                                         element.html("").append(s).show();
                                     }
-                                    if (found.instance.changed) {
-                                        found.instance.changed({params: params, element: element});
-                                    } else if (found.instance.rendered) {
-                                        found.instance.rendered({params: params, element: element});
-                                    }
+                                    utils.moduleRendered(found.instance, {params: params, element: element}, false);
                                     showFunc();
                                 })
                             } else if (typeof c === "string" || c instanceof HTMLElement) {
@@ -121,11 +117,7 @@ define([
                                 } else {
                                     element.html("").append(c).show();
                                 }
-                                if (found.instance.changed) {
-                                    found.instance.changed({params: params, element: element});
-                                } else if (found.instance.rendered) {
-                                    found.instance.rendered({params: params, element: element});
-                                }
+                                utils.moduleRendered(found.instance, {params: params, element: element}, false);
                                 showFunc();
                             }
                         }

@@ -6,7 +6,7 @@ define([], () => class {
             <p class="text-center">
                 <h2>JavaScript application frameworks</h2>
             </p>
-                ${async () => this.template.forEach(await(await fetch("../shared/frameworks.json")).json(), (name, item) => String.html`
+                ${async () => this.template.forEach(await _app.fetch("../shared/frameworks.json"), (name, item) => String.html`
                     <div class="panel panel-default">
                         <div class="panel-heading">${name}</div>
                         <ul class="list-group">
@@ -19,6 +19,12 @@ define([], () => class {
                     </div>`
                 )}
             </div>`;
+    }
+
+    rendered({element}) {
+        console.log("Module rendered into element:");
+        console.log(element);
+        console.log();
     }
 
 })

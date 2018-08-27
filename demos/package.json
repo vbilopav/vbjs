@@ -2,6 +2,6 @@
   "version": "1.0.0",
   "private": true,
   "devDependencies": {
-    "vbjs": "^1.0.27"
+    "vbjs": "^1.0.30"
   }
 }

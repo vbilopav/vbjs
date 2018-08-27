@@ -20,7 +20,7 @@ define([
             if (sub instanceof Promise) {
                 promises.push({index: i, sub: sub});
             }
-            if (sub === undefined) {
+            if (typeof sub !== "string") {
                 subs[i] = "";
             }
         }
@@ -38,7 +38,7 @@ define([
                     }
                     sub = result === undefined || typeof result === "function" ? "" : result;
                 }
-                subs[promise.index] = sub === undefined ? "" : sub;
+                subs[promise.index] = typeof sub !== "string" ? "" : sub;
             }
             return String.raw(pieces, ...subs);
         })();
@@ -50,13 +50,12 @@ define([
         prepareTemplate = (data, name, locale) => {
             data = data || {};
             if (!data.template) {
-                data.template = helpers;
+                data.template = helpers();
             }
             if (locale) {
                 data.template = Object.assign(data.template, locale);
             }
             data.template.name = name;
-            data.___rendered = element => !data.template.rendered || data.template.rendered(element);
             return data;
         },
         parseTemplate = (text, data, locale, name) => 

@@ -16,7 +16,7 @@ define([], () => class {
                         <div class='panel-heading'>${this.value}</div>
                         <div class='panel-body'>
                             <ul>
-                            ${async () => this.template.forEach(await(await fetch("https://api.github.com/users/" + this.value)).json(), (key, value) => 
+                            ${async () => this.template.forEach(await _app.fetch("https://api.github.com/users/" + this.value), (key, value) => 
                                 String.html`
                                 <li class="list-group-item">
                                     <strong>${key}: </strong>${value}

@@ -2,7 +2,7 @@ define([], () => class {
 
     constructor() {
         this.username = "vbilopav"; // default value for the model element username
-        this.model = new _app.Model();
+        this.context = this; // when context object is available, model will be automatically binded and assigned to instance
     }
 
     render() {
@@ -12,10 +12,6 @@ define([], () => class {
                 <input type="text" name="username">
                 <button name="show" onclick="showClick">Show github user data</button>
             </div>`;
-    }
-
-    rendered({element}) {
-        this.model.bind(element, this);
     }
 
     showClick() {

@@ -20,6 +20,7 @@ define([
 
     _app.Model = Model;
     _app.import = m => new Promise(resolve => require(m, r => resolve(r)));
+    _app.fetch = async (url, opts) => await(await fetch(url, opts)).json();
     require([_app.config.module], app => app(_app.config.elementId));
 
 });
