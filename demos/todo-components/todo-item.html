@@ -1,0 +1,15 @@
+<div class="ToDoItem" id="item">
+    <p class="ToDoItem-Text">${this.dataIndex + ". " + this.html}</p>
+    <div class="ToDoItem-Delete" onclick="deleteClick">-</div>
+</div>
+
+${
+<script>
+    this.template.context = {
+        deleteClick: () => {
+            this.template.owner.count--;
+            this.template.model.item.remove();
+        }
+    }
+</script>
+}

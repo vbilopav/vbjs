@@ -1,4 +1,4 @@
-define([], () => {
+define(["sys/view-manager/components"], ({getTags})  => {
 
     const 
         isTemplate = name => name.indexOf("template!") !== -1,
@@ -61,8 +61,17 @@ define([], () => {
                 }
             }
             return params
+        },
+        
+        prepareInstance: inst => {
+            inst.components = null;
+            inst.watch = (...components) =>  {
+                if (!components || !components.length) {
+                    components = getTags();
+                }
+                inst.components = components.map(i => i.toUpperCase());
+            }
         }
-
     }
 
  });

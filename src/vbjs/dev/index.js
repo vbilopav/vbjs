@@ -61,13 +61,13 @@
                 }
             }
             if (samePartsLength == 0) {
-                return to;
+                return to.endsWith("/") ? to.substring(0, to.length-1) : to;
             }
             var outputParts = [];
             for (var i = samePartsLength; i < lowerFromParts.length; i++) {
                 outputParts.push('..');
             }
-            outputParts = outputParts.concat(toParts.slice(samePartsLength));      
+            outputParts = outputParts.concat(toParts.slice(samePartsLength));
             return outputParts.join('/');
         };
 

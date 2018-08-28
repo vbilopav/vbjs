@@ -1,0 +1,53 @@
+${this.template.css.import("todo-components/todo.css", "todo-components/todo-item.css")}
+
+${
+<script>
+    // constructor
+    (
+        () => {
+            // register "todo-item" tag with the application
+            _app.component({tag: "todo-item", src: "template!todo-components/todo-item.html"});
+
+
+            // not all templates contain custom tags!
+            // so, inform template to wath it-self for custom components/tags:
+            // this will also include watching any further dom mutation
+            this.template.watch();
+
+            // To optimize template parsing, tell inform template to wath it-self for only specific custom tags:
+            // this.template.watch("todo-item");
+            // this.template.watch("tag-a", "tag-b");
+            // etc...
+        }
+    )()
+</script>
+}
+
+<div class="ToDo">
+    <h1 class="ToDo-Header">VB SPA template To Do</h1>
+    <div class="ToDo-Container">
+        <div class="ToDo-Content" id="content">
+            ${
+                async () => this.template.forEach(await _app.fetch("../shared/todo.json"), (item, index) => 
+                `
+                    <todo-item data-index="${this.count = index+1}">${item}</todo-item>
+                `
+                )
+            }
+        </div>
+        <input type="text" id="input" />
+        <div class="ToDo-Add" onclick="createNewToDoItem">+</div>
+    </div>
+</div>
+
+${
+<script>
+    this.template.context = {
+        input: "initial value",
+        createNewToDoItem: () => this.template.model.content.insertAdjacentHTML(
+            "beforeend",
+            `<todo-item data-index="${++this.count}">${this.template.model.input.value}</todo-item>`
+        )
+    }
+</script>
+}

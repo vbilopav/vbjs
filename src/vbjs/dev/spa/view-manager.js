@@ -1,8 +1,14 @@
 define([
+
     "sys/view-manager/utils", 
     "sys/view-manager/reveal",
     "sys/app"
-], (utils, reveal, app) => class {
+
+], (
+    utils, 
+    {reveal, revealComponents}, 
+    app
+) => class {
 
     constructor(
         container=(()=>{throw container})()
@@ -53,11 +59,17 @@ define([
                     if (found.uriHash !== uriHash) {
                         let result = found.instance(params);
                         if (typeof result === "string") {
+                            
                             element.html(result);
                             utils.templateRendered(params, element);
+                            revealComponents(element, params.template, params);
+
                         } else if (result instanceof HTMLElement) {
+                            
                             element.html("").append(result);
                             utils.templateRendered(params, element);
+                            revealComponents(element, params.template);
+
                         } else if (result instanceof Promise) {
                             result.then(r => {
                                 if (typeof r === "string") {
@@ -65,7 +77,10 @@ define([
                                 } else {
                                     element.html("").append(r);
                                 }
+
                                 utils.templateRendered(params, element);
+                                revealComponents(element, params.template, params);
+
                             });
                         }
                     }
@@ -108,7 +123,10 @@ define([
                                     } else {
                                         element.html("").append(s).show();
                                     }
+
                                     utils.moduleRendered(found.instance, {params: params, element: element}, false);
+                                    revealComponents(element, data.instance._options);
+
                                     showFunc();
                                 })
                             } else if (typeof c === "string" || c instanceof HTMLElement) {
@@ -117,7 +135,10 @@ define([
                                 } else {
                                     element.html("").append(c).show();
                                 }
+                                
                                 utils.moduleRendered(found.instance, {params: params, element: element}, false);
+                                revealComponents(element, data.instance._options);
+
                                 showFunc();
                             }
                         }

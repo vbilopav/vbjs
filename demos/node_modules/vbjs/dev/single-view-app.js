@@ -1,5 +1,5 @@
 define(
-    ["sys/app", "sys/view-manager/reveal"], (app, reveal) => 
+    ["sys/app", "sys/view-manager/reveal"], (app, {reveal}) => 
         id => {
             const parseQueryString = input => 
                 input.slice(input.indexOf('?') + 1)

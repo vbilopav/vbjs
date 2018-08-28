@@ -2,6 +2,7 @@ define([
     "sys/app",
     "sys/models/model",
     "extension-Element/find",
+    "extension-Element/findAll",
     "extension-Element/forEachChild",
     "extension-Element/show",
     "extension-Element/hide",
@@ -14,7 +15,8 @@ define([
     "extension!Window/on",
     "extension-Element/addClass",
     "extension-Element/removeClass",
-    "sys/template/parser"
+    "sys/template/parser",
+    "sys/view-manager/components"
 
 ], (_app, Model) => {
 

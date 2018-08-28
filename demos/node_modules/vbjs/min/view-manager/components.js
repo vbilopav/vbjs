@@ -1,0 +1,1 @@
+define(["sys/app"],e=>{e._components=[];return e.component=(({tag:n,src:t,wrap:a="span"})=>{let o=n.indexOf("-");if(-1===o||0===o||o===n.length-1)throw new Error("Invalid tag name. Tags names should include at least one dash, not on start or end of tag name.");return e._components[n.toUpperCase()]={src:t,wrap:a},e}),{getTags:()=>Object.keys(_app._components)}});

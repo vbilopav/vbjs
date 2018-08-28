@@ -1,11 +1,13 @@
 define([
     "sys/template/helpers", 
     "sys/template/import",
-    "sys/app"
+    "sys/app",
+    "sys/view-manager/utils"
 ], (
     helpers, 
     importParser,
-    app
+    app,
+    {prepareInstance}
 ) => {
 
     app.template = (pieces, ...subs) => {
@@ -56,6 +58,11 @@ define([
                 data.template = Object.assign(data.template, locale);
             }
             data.template.name = name;
+            prepareInstance(data.template);
+            if (data.___owner) {
+                data.template.owner = data.___owner;
+                delete data.___owner;
+            }
             return data;
         },
         parseTemplate = (text, data, locale, name) => 
