@@ -1,6 +1,7 @@
 define([
     "sys/app",
     "sys/models/model",
+    "sys/view-manager/reveal",
     "extension-Element/find",
     "extension-Element/findAll",
     "extension-Element/forEachChild",
@@ -18,11 +19,13 @@ define([
     "sys/template/parser",
     "sys/view-manager/components"
 
-], (_app, Model) => {
+], (_app, Model, {reveal}) => {
 
     _app.Model = Model;
     _app.import = m => new Promise(resolve => require(m, r => resolve(r)));
     _app.fetch = async (url, opts) => await(await fetch(url, opts)).json();
+    _app.render = async (view, elementOrId, params) => 
+        await reveal({view: view, elementOrId: elementOrId, params: params});
     require([_app.config.module], app => app(_app.config.elementId));
 
 });

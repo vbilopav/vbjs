@@ -60,7 +60,7 @@ define([
             data.template.name = name;
             prepareInstance(data.template);
             if (data.___owner) {
-                data.template.owner = data.___owner;
+                data.template.parent = data.___owner;
                 delete data.___owner;
             }
             return data;

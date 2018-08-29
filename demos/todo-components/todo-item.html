@@ -7,7 +7,7 @@ ${
 <script>
     this.template.context = {
         deleteClick: () => {
-            this.template.owner.count--;
+            this.template.parent.count--;
             this.template.model.item.remove();
         }
     }

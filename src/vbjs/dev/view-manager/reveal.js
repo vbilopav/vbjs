@@ -1,11 +1,16 @@
 define([
 
     "sys/view-manager/utils", 
-    "sys/app"
+    "sys/app",
+    "sys/template/helpers",
+    "sys/view-manager/components",
 
 ], (
     utils,
-    app
+    app,
+    helpers,
+    {getEntry},
+    
 ) => {
 
     const 
@@ -14,7 +19,7 @@ define([
                 return;
             }
             const 
-                entry = _app._components[e.nodeName];
+                entry = getEntry(e.nodeName);
             if (!entry) {
                 return;
             }
@@ -31,6 +36,12 @@ define([
             e.remove();
             if (owner) {
                 params.___owner = owner;
+                let name = params.name || params.id;
+                if (name) {
+                    owner = owner.template || owner;
+                    owner.children = owner.children || {};
+                    owner.children[name.toCamelCase()] = params;
+                }
             }
             return {view: entry.src, elementOrId: wrapper, params: params}
         },
@@ -118,16 +129,16 @@ define([
         
                         element.html(result);
                         
-                        utils.templateRendered(params, element);
                         revealComponents(element, params.template, params);
+                        utils.templateRendered(params, element);
         
                     } else if (result instanceof HTMLElement) {
         
                         element.html("").append(result);
                         
-                        utils.templateRendered(params, element);
                         revealComponents(element, params.template, params);
-        
+                        utils.templateRendered(params, element);
+
                     } else if (result instanceof Promise) {
         
                         result.then(r => {
@@ -138,8 +149,8 @@ define([
                                 element.html("").append(r);
                             }
                             
-                            utils.templateRendered(params, element);
                             revealComponents(element, params.template, params);
+                            utils.templateRendered(params, element);
         
                         });
                     }
@@ -147,12 +158,21 @@ define([
                 } else if (type === utils.types.class) {
                     let options = {
                         disableCaching: false,
-                        callRenderOnlyOnce: false
+                        callRenderOnlyOnce: false,
+                        css: []
                     };
                     utils.prepareInstance(options);
                     data.instance = new view({id: id, element: element, options: options}, ...injected);
                     data.instance._options = options;
                     
+                    if (params.___owner) {
+                        data.instance.parent = params.___owner; 
+                        delete params.___owner;
+                    }
+                    
+                    if (options.css && options.css.length) {
+                        helpers().css.import(...options.css)
+                    }
                 }
         
                 let contentFunc = c => {
@@ -165,8 +185,8 @@ define([
                                 element.html("").append(s);
                             }
                             
+                            revealComponents(element, data.instance._options, data.instance);
                             utils.moduleRendered(data.instance, {params: params, element: element});
-                            revealComponents(element, data.instance._options);
 
                         })
                     } else if (typeof c === "string" || c instanceof HTMLElement) {
@@ -176,8 +196,8 @@ define([
                             element.html("").append(c);
                         }
                         
+                        revealComponents(element, data.instance._options, data.instance);
                         utils.moduleRendered(data.instance, {params: params, element: element});
-                        revealComponents(element, data.instance._options);
 
                     }
                 }

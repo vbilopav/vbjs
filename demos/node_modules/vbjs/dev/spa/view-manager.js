@@ -61,14 +61,15 @@ define([
                         if (typeof result === "string") {
                             
                             element.html(result);
-                            utils.templateRendered(params, element);
                             revealComponents(element, params.template, params);
+                            utils.templateRendered(params, element);
 
                         } else if (result instanceof HTMLElement) {
                             
                             element.html("").append(result);
+                            revealComponents(element, params.template, params);
                             utils.templateRendered(params, element);
-                            revealComponents(element, params.template);
+                            
 
                         } else if (result instanceof Promise) {
                             result.then(r => {
@@ -78,8 +79,8 @@ define([
                                     element.html("").append(r);
                                 }
 
-                                utils.templateRendered(params, element);
                                 revealComponents(element, params.template, params);
+                                utils.templateRendered(params, element);
 
                             });
                         }
@@ -124,8 +125,8 @@ define([
                                         element.html("").append(s).show();
                                     }
 
+                                    revealComponents(element, data.instance._options, data.instance);
                                     utils.moduleRendered(found.instance, {params: params, element: element}, false);
-                                    revealComponents(element, data.instance._options);
 
                                     showFunc();
                                 })
@@ -136,8 +137,8 @@ define([
                                     element.html("").append(c).show();
                                 }
                                 
+                                revealComponents(element, data.instance._options, data.instance);
                                 utils.moduleRendered(found.instance, {params: params, element: element}, false);
-                                revealComponents(element, data.instance._options);
 
                                 showFunc();
                             }

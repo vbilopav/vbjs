@@ -6,7 +6,7 @@ ${
     (
         () => {
             // register "todo-item" tag with the application
-            _app.component({tag: "todo-item", src: "template!todo-components/todo-item.html"});
+            _app.customElements.define({tag: "todo-item", src: "template!todo-components/todo-item.html"});
 
 
             // not all templates contain custom tags!
@@ -14,10 +14,17 @@ ${
             // this will also include watching any further dom mutation
             this.template.watch();
 
-            // To optimize template parsing, tell inform template to wath it-self for only specific custom tags:
+            // To optimize template parsing - inform template to wath it-self for only specific custom tags:
             // this.template.watch("todo-item");
             // this.template.watch("tag-a", "tag-b");
             // etc...
+
+            this.template.rendered = element => {
+                // Only rendered components that have name or id attribute will ba available in children property
+                console.log("I haz following components: ");
+                console.log(this.template.children);
+                console.log();
+            }
         }
     )()
 </script>
@@ -30,7 +37,7 @@ ${
             ${
                 async () => this.template.forEach(await _app.fetch("../shared/todo.json"), (item, index) => 
                 `
-                    <todo-item data-index="${this.count = index+1}">${item}</todo-item>
+                    <todo-item id="${'todo-item-' + index}" data-index="${this.count = index+1}">${item}</todo-item>
                 `
                 )
             }

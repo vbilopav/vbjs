@@ -28,8 +28,8 @@ define(["sys/view-manager/components"], ({getTags})  => {
             !params.template.rendered || params.template.rendered(element);
         };
         moduleRendered = (instance, args, skipChange=true) => {
-            if (instance.model instanceof _app.Model === false && (instance.context || instance.model)) {
-                instance.model = new _app.Model(instance.model).bind(args.element, instance.context);
+            if (instance._options.model instanceof _app.Model === false && (instance._options.context || instance._options.model)) {
+                instance.model = new _app.Model(instance._options.model).bind(args.element, instance._options.context);
             }
             if (skipChange)  {
                 !instance.rendered || instance.rendered({params: args.params, element: args.element});
