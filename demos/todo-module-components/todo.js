@@ -5,10 +5,11 @@ define([], () => {
     return class {
 
         constructor({options}) {
-            this.value = "initial";
             options.context = this;
             options.css = ["todo-module-components/todo.css", "todo-module-components/todo-item.css"];
             options.watch();
+
+            this.value = "initial";
             this.count = 0;
         }
 

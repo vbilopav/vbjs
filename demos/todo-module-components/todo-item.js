@@ -18,4 +18,11 @@ define([], () => class {
         this.model.item.remove();
     }
 
+    set id(value) {
+        console.log("id atrribute set to " + value);
+    } 
+
+    set dataIndex(value) {
+        console.log("data-index atrribute set to " + value);
+    } 
 })

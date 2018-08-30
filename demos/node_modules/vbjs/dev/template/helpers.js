@@ -10,13 +10,11 @@ define([], () => {
     
             css: {
                 import: (...names) => {
-                    require(names.map(item => item.startsWith("text!") ? item : "text!" + item), (...results) => {
-                        document.head.appendChild(
-                            `<style type="text/css">
-                                ${results.join("")}
-                            </style>`.toHTML()
-                        )
-                    });
+                    document.head.appendChild(
+                        `<style type="text/css">
+                            ${names.map(item => require(item.startsWith("text!") ? item : "text!" + item)).join("")}
+                        </style>`.toHTML()
+                    )
                 }
             },
     

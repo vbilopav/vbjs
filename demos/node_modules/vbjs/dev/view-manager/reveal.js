@@ -1,16 +1,12 @@
 define([
-
     "sys/view-manager/utils", 
     "sys/app",
-    "sys/template/helpers",
     "sys/view-manager/components",
-
 ], (
     utils,
     app,
-    helpers,
-    {getEntry},
-    
+    {getEntry}
+
 ) => {
 
     const 
@@ -30,6 +26,7 @@ define([
             for(let i = 0, l = e.attributes.length; i<l; i++) {
                 let attr = e.attributes[i];
                 params[attr.name.toCamelCase()] = attr.value;
+                wrapper.setAttribute(attr.name, attr.value);
             }
             params["html"] = e.html();
             e.parentElement.insertBefore(wrapper, e);
@@ -43,10 +40,30 @@ define([
                     owner.children[name.toCamelCase()] = params;
                 }
             }
+            const 
+                observer = new MutationObserver(mutations => {
+                    let inst = params.template || params;
+                    for (let mutation of mutations) { 
+                        if (!mutation.attributeName) {
+                            continue;
+                        }
+                        const 
+                            name = mutation.attributeName.toCamelCase(),
+                            value = mutation.target.getAttribute(mutation.attributeName);
+                        if (params.template) {
+                            !params.template[name] || params.template[name](value);
+                        }
+                        if (params.__instance) {
+                            params.__instance[name] = value;
+                        }
+                    }
+                });
+            observer.observe(wrapper, {attributes: true, childList: false, subtree: false});
             return {view: entry.src, elementOrId: wrapper, params: params}
         },
         revealComponents = (element, instance, owner) => {
-            let components = instance.components;
+            let 
+                components = instance.components;
             if (!components || !components.length) {
                 return;
             }
@@ -72,7 +89,8 @@ define([
                         }
                     }
                 });
-            const config = {attributes: false, childList: true, subtree: true};
+            const 
+                config = {attributes: false, childList: true, subtree: true};
             if (revealAll.length) {
                 Promise.all(revealAll.map(arg => reveal(arg))).then(r => {
                     observer.observe(element, config);
@@ -108,34 +126,87 @@ define([
             }
             
             require(modules, (view, ...injected) => {
-                let uriHash = uri.hashCode();
-                let type = utils.getViewType(view, viewName),
+                const 
+                    uriHash = uri.hashCode(),
+                    type = utils.getViewType(view, viewName),
                     element = (typeof elementOrId === "string" ? "span".createElement(elementOrId) : elementOrId),
                     data = {type: type, uriHash: uriHash, x: 0, y: 0, id: id};
+
                 if (id) {
                     element.dataset.id = id;
                 }
+
+                const
+                    resolveView = () => {
+                        const 
+                            contentFunc = c => {
+                            if (typeof c === "function" || c instanceof Array) {
+                                c = app.parse(...c);
+                                c.then(s => {
+                                    if (typeof s === "string") {
+                                        element.html(s);
+                                    } else {
+                                        element.html("").append(s);
+                                    }
+                                    
+                                    revealComponents(element, data.instance._options, data.instance);
+                                    utils.moduleRendered(data.instance, {params: params, element: element});
+        
+                                })
+                            } else if (typeof c === "string" || c instanceof HTMLElement) {
+                                if (typeof c === "string") {
+                                    element.html(c);
+                                } else {
+                                    element.html("").append(c);
+                                }
+                                
+                                revealComponents(element, data.instance._options, data.instance);
+                                utils.moduleRendered(data.instance, {params: params, element: element});
+        
+                            }
+                            };
+                        if (type === utils.types.class) {
+                            let content = data.instance.render({params: params, element: element});
+                            if (typeof content === "function" || content instanceof Array) {
+                                if (typeof content === "function") {
+                                    content = app.parse(content);
+                                } else {
+                                    content = app.parse(...content);
+                                }
+                            }
+                            if (content instanceof Promise) {
+                                return content.then(s => {
+                                    contentFunc(s);
+                                    return resolve({data, element});
+                                });
+                            } else {
+                                contentFunc(content);
+                                return resolve({data, element});
+                            }
+                        } else {
+                            return resolve({data, element});
+                        }
+                    }
+
                 
                 if (type === utils.types.string) {
-        
                     data.element = element.html(view);
-        
-                } else if (type === utils.types.template) {
-        
+                    return resolveView();
+                }
+                
+                if (type === utils.types.template) {
                     data.instance = view;
                     let result = view(params, {injected: injected});
-        
+
                     if (typeof result === "string") {
-        
+
                         element.html(result);
-                        
                         revealComponents(element, params.template, params);
                         utils.templateRendered(params, element);
         
                     } else if (result instanceof HTMLElement) {
         
                         element.html("").append(result);
-                        
                         revealComponents(element, params.template, params);
                         utils.templateRendered(params, element);
 
@@ -154,76 +225,42 @@ define([
         
                         });
                     }
-                    
-                } else if (type === utils.types.class) {
-                    let options = {
-                        disableCaching: false,
-                        callRenderOnlyOnce: false,
-                        css: []
-                    };
+
+                    return resolveView();
+                }
+                
+                if (type === utils.types.class) {
+                    const
+                        options = {
+                            disableCaching: false,
+                            callRenderOnlyOnce: false,
+                            css: []
+                        };
                     utils.prepareInstance(options);
                     data.instance = new view({id: id, element: element, options: options}, ...injected);
                     data.instance._options = options;
-                    
+                    params.__instance = data.instance;
                     if (params.___owner) {
                         data.instance.parent = params.___owner; 
                         delete params.___owner;
                     }
                     
                     if (options.css && options.css.length) {
-                        helpers().css.import(...options.css)
-                    }
-                }
-        
-                let contentFunc = c => {
-                    if (typeof c === "function" || c instanceof Array) {
-                        c = app.parse(...c);
-                        c.then(s => {
-                            if (typeof s === "string") {
-                                element.html(s);
-                            } else {
-                                element.html("").append(s);
-                            }
-                            
-                            revealComponents(element, data.instance._options, data.instance);
-                            utils.moduleRendered(data.instance, {params: params, element: element});
 
-                        })
-                    } else if (typeof c === "string" || c instanceof HTMLElement) {
-                        if (typeof c === "string") {
-                            element.html(c);
-                        } else {
-                            element.html("").append(c);
-                        }
-                        
-                        revealComponents(element, data.instance._options, data.instance);
-                        utils.moduleRendered(data.instance, {params: params, element: element});
-
-                    }
-                }
-        
-                if (type === utils.types.class) {
-                    let content = data.instance.render({params: params, element: element});
-                    if (typeof content === "function" || content instanceof Array) {
-                        if (typeof content === "function") {
-                            content = app.parse(content);
-                        } else {
-                            content = app.parse(...content);
-                        }
-                    }
-                    if (content instanceof Promise) {
-                        return content.then(s => {
-                            contentFunc(s);
-                            return resolve({data, element});
+                        require(options.css.map(item => item.startsWith("text!") ? item : "text!" + item), (...results) => {
+                            document.head.appendChild(
+                                `<style type="text/css">
+                                    ${results.join("")}
+                                </style>`.toHTML()
+                            );
+                            return resolveView();
                         });
+
                     } else {
-                        contentFunc(content);
-                        return resolve({data, element});
+                        return resolveView();
                     }
-                } else {
-                    return resolve({data, element});
                 }
-        
+
             });
         
         });

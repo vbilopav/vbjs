@@ -4,10 +4,10 @@
     <button onclick="showClick">Show github user data</button>
 </div>
 ${
-    <script>
+<script>
     this.template.context = {
         username: "vbilopav", // default value
         showClick: () => window.location = "#/github-user-info/" + this.template.model.username.value
     }
-    </script>
+</script>
 }
