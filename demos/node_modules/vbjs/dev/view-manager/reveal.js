@@ -82,7 +82,9 @@ define([
                             continue;
                         }
                         for (let e of mutation.addedNodes) {
-                            let parsed = parseComponentByElement(e, components, owner);
+                            let 
+                                parsed = parseComponentByElement(e, components, owner);
+                            observer.takeRecords();
                             if (parsed) { 
                                 reveal(parsed);
                             }
