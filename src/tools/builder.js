@@ -9,6 +9,12 @@ const {
     path
 } = require("./fs");
 
+const getVersion = () => {
+    let contents = fs.readFileSync("../vbjs/package.json");
+    let jsonContent = JSON.parse(contents);
+    return jsonContent.version;
+}
+
 class Builder {
 
     constructor (sourceDir) {
@@ -33,13 +39,9 @@ class Builder {
     }
 
     buildBundle({
-        bundleDir, 
-        entryPoint="main", 
-        pluginsPath="require-plugins",
-        indexModule="index",
-        sysPath="sys",
-        useMin=true
+        bundleDir, entryPoint="main", pluginsPath="require-plugins", indexModule="vbjs", sysPath="sys", useMin=true, skip=[]
     }) {
+
         if (!this.minDir) {
             throw new Error("buildMin(dir) must be called first")
         }
@@ -56,6 +58,8 @@ class Builder {
             return sysPath + "/" + (parsed.dir ? parsed.dir.replace(path.sep, "/") + "/" : "") + parsed.name;
         }
 
+        const shouldSkip = id => skip.includes(id);
+
         this.bundleDir = cleanPath(bundleDir);
         console.log(`>>> Removing min dir ${this.bundleDir}`);
         rmdirSync(this.bundleDir);
@@ -64,10 +68,19 @@ class Builder {
             modules = [],
             entryPointContent,
             indexContent,
-            bundleFile = path.join(this.bundleDir, "vbjs.min.js");
+            bundleFile;
         
         for (let item of walkSync(sourceDir)) {
             let moduleId = getModuleId(item.full);
+  
+            if (shouldSkip(moduleId)) {
+                let dirName = cleanPath(item.dir).replace(sourceDir, this.bundleDir),
+                    fileName = cleanPath(item.full).replace(sourceDir, this.bundleDir);
+                mkDirByPathSync(dirName);
+                console.log(`>>> Copying ${item.full} to ${fileName}...`);
+                fs.copyFileSync(item.full, fileName);
+                continue;
+            }
 
             if (isEntryPoint(moduleId)) {
 
@@ -77,13 +90,13 @@ class Builder {
             } else if (isIndex(moduleId)) {
 
                 indexContent = fs.readFileSync(item.full).toString();
+                bundleFile = cleanPath(item.full).replace(sourceDir, this.bundleDir);
 
             } else {
 
                 let moduleContent = fs.readFileSync(item.full).toString();
                 content += moduleContent.replace("define(", "define('" + moduleId + "',");
                 modules.push(moduleId);
-
             }
             
         }
@@ -104,8 +117,10 @@ class Builder {
             entryPointContent.substring(close, entryPointContent.length);
         content += entryPointContent;
 
-        indexContent = indexContent.replace("const configure=()=>{}", "const configure=()=>{" + content + "}");
-
+        let version = getVersion();
+        indexContent = 
+            "/* vbjs " + version + " */" + os.EOL + indexContent.replace("const configure=()=>{}", "const configure=()=>{" + content + "}");
+        
         console.log(`>>> Creating bundle ${bundleFile}...`);
         fs.writeFileSync(bundleFile, indexContent, "utf8");
     }

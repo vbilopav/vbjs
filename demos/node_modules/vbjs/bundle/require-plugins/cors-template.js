@@ -1,0 +1,1 @@
+define(["module","sys/template/parser","sys/template/import","sys/template/tags"],(e,t,s,a)=>({version:"1.0.0",load(e,p,r){fetch(e,{mode:"cors"}).then(e=>e.text()).then(p=>s.parseImportsAsync(p).then(()=>r((s,p)=>t.parseTemplate(a.parse(text),s,p,e))))}}));

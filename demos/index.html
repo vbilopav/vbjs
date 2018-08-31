@@ -48,6 +48,16 @@
         </li>
 
         <li>
+            List content of remote endpoint in a simple embedded template in document using <code>app.fetch</code> and <code>template.forEach</code> in <code>async</code> mode.
+            <br/>
+            <code>app.fetch</code> is just shortheand for standard <code>fetch</code> api <code>app.fetch = async (url, opts) => await(await fetch(url, opts)).json();</code>.
+            <br/>
+            <code>template.forEach</code> is built-in template helper for iteration trough arrays and objects.
+            <br/>
+            <a href="/frameworks-document/">/frameworks-document/</a>
+        </li>
+
+        <li>
             Lists content of same remote endpoint in class module instead of template in <code>async</code> mode.
             <br/>
             HTML is rendered inside <code>render</code> method of the module, using standard JS ES6 template strings support.

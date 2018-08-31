@@ -34,7 +34,7 @@
     const
         defaults = {
             version: "",
-            appUrl: "app",
+            appUrl: "/",
             cssUrl: "css",
             libsUrl: null,
             appModule: "sys/single-view-app",
@@ -48,7 +48,7 @@
         version = scr.getAttribute("data-version") === null ? defaults.version : scr.getAttribute("data-version"),
         appUrl = scr.getAttribute("data-app-url") === null ? defaults.appUrl : scr.getAttribute("data-app-url"),
         cssUrl = scr.getAttribute("data-css-url") === null ? defaults.cssUrl : scr.getAttribute("data-css-url"),
-        sysUrl = scr.getAttribute("src").replace("index.js", ""),
+        sysUrl = scr.getAttribute("src").replace("vbjs.js", ""),
         appModule = scr.getAttribute("data-app-module") === null ? defaults.appModule : scr.getAttribute("data-app-module"),
         viewModule = scr.getAttribute("data-view-module"),
         appElementId = scr.getAttribute("data-app-container-id") || defaults.appElementId,
@@ -109,6 +109,7 @@
             text: ["https://cdnjs.cloudflare.com/ajax/libs/require-text/2.0.12/text.min", libsPath + "/requirejs-text/text"],
             sys: sysPath,
             "template": sysPath + "/require-plugins/template",
+            "document": sysPath + "/require-plugins/document",
             "composite": sysPath + "/require-plugins/composite",
             "cors-text": sysPath + "/require-plugins/cors-text",
             "cors-template": sysPath + "/require-plugins/cors-template",
