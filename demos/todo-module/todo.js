@@ -10,7 +10,7 @@ define(["todo-module/todo-item"], Item => class {
         return [() => String.html`
             ${this.template.css.import("todo-module/todo.css", "todo-module/todo-item.css")}
             <div class="ToDo">
-                <h1 class="ToDo-Header">VB SPA template To Do</h1>
+                <h1 class="ToDo-Header">VBJS template To Do</h1>
                 <div class="ToDo-Container">
                     <div class="ToDo-Content" id="content">
                         ${async () => this.template.forEach(
