@@ -32,7 +32,14 @@ define([
     }
 
     async reveal({id="", view=(()=>{throw view})(), params={}, uri=""}) {
-        params = await utils.prepareParams(params);
+        if (params instanceof Promise) {
+            params = await params
+        }
+        if (typeof params !== "object") {
+            params = {
+                value: params
+            }
+        }
         await new Promise((resolve, reject) => {
             let found = this._views[id],
                 uriHash = uri.hashCode(),

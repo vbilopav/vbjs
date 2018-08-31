@@ -1,5 +1,7 @@
 (function () {
 
+    const configure = () => {}
+
     const 
         relative = function(from, to) {
             from = (from[0] === '/' || from[0] === '.' ? from : '/' + from);
@@ -80,8 +82,7 @@
     const 
         sysPath = relative(appUrl, sysUrl),
         libsPath = relative(appUrl, libsUrl);
-    
-    window.require = {baseUrl: window[appObjectName].appUrl};
+
     if (window[appObjectName].version) {
         window.require.urlArgs = "v=" + window[appObjectName].version;
     }
@@ -100,33 +101,31 @@
         }
     }
 
+    window.require = {
+        baseUrl: window[appObjectName].appUrl,
+        __appObjName: appObjectName,
+        paths: {
+            libs: libsPath,
+            text: ["https://cdnjs.cloudflare.com/ajax/libs/require-text/2.0.12/text.min", libsPath + "/requirejs-text/text"],
+            sys: sysPath,
+            "template": sysPath + "/require-plugins/template",
+            "composite": sysPath + "/require-plugins/composite",
+            "cors-text": sysPath + "/require-plugins/cors-text",
+            "cors-template": sysPath + "/require-plugins/cors-template",
+            "extension": sysPath + "/require-plugins/extension"
+        }
+    }
+
     const 
         loadLoader = (src, onload) => {
             let script = document.createElement("script");
             script.async = true;
             script.src = src;
-            script.setAttribute("data-main", sysPath + "/main.js")
+            script.setAttribute("data-main", "sys/main")
             document.body.appendChild(script);
             script.onload = onload;
             script.onerror = onload;
-        },
-        configure = () => {
-            window.requirejs.config({
-                __appObjName: appObjectName,
-                paths: {
-                    libs: libsPath,
-                    text: ["https://cdnjs.cloudflare.com/ajax/libs/require-text/2.0.12/text.min", libsPath + "/requirejs-text/text"],
-                    sys: sysPath,
-                    "template": sysPath + "/require-plugins/template",
-                    "composite": sysPath + "/require-plugins/composite",
-                    "cors-text": sysPath + "/require-plugins/cors-text",
-                    "cors-template": sysPath + "/require-plugins/cors-template",
-                    "extension-Element": sysPath + "/extensions/HTMLElement",
-                    "extension-String": sysPath + "/extensions/String",
-                    "extension": sysPath + "/require-plugins/extension"
-                }
-            });
-        }
+        };
 
     loadLoader("https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.min.js", () => {
         if (window.requirejs) {
@@ -137,3 +136,4 @@
     });
 
 })();
+

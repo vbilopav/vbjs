@@ -5,7 +5,7 @@ define([
 ], (
     utils,
     app,
-    {getEntry}
+    {getEntry, getTags}
 
 ) => {
 
@@ -32,7 +32,9 @@ define([
             e.parentElement.insertBefore(wrapper, e);
             e.remove();
             if (owner) {
-                params.___owner = owner;
+                params.___extra = Object.assign(params.___extra || {}, {
+                    parent: owner
+                });
                 let name = params.name || params.id;
                 if (name) {
                     owner = owner.template || owner;
@@ -42,7 +44,6 @@ define([
             }
             const 
                 observer = new MutationObserver(mutations => {
-                    let inst = params.template || params;
                     for (let mutation of mutations) { 
                         if (!mutation.attributeName) {
                             continue;
@@ -198,7 +199,16 @@ define([
                 
                 if (type === utils.types.template) {
                     data.instance = view;
-                    let result = view(params, {injected: injected});
+                    params.___extra = Object.assign(params.___extra || {}, {
+                        components: null,
+                        watch: (...components) =>  {
+                            if (!components || !components.length) {
+                                components = getTags();
+                            }
+                            params.template.components = components.map(i => i.toUpperCase());
+                        }
+                    });
+                    const result = view(params, {injected: injected});
 
                     if (typeof result === "string") {
 
@@ -236,15 +246,26 @@ define([
                         options = {
                             disableCaching: false,
                             callRenderOnlyOnce: false,
-                            css: []
+                            css: [],
+                            components: null,
+                            watch: (...components) =>  {
+                                if (!components || !components.length) {
+                                    components = getTags();
+                                }
+                                options.components = components.map(i => i.toUpperCase());
+                            }
                         };
-                    utils.prepareInstance(options);
+                        
+                    //utils.prepareInstance(options);
                     data.instance = new view({id: id, element: element, options: options}, ...injected);
                     data.instance._options = options;
                     params.__instance = data.instance;
-                    if (params.___owner) {
-                        data.instance.parent = params.___owner; 
-                        delete params.___owner;
+
+                    if (params.___extra) {
+                        for(let [key, value] of Object.entries(params.___extra)) {
+                            data.instance[key] = value;
+                        }
+                        delete params.___extra;
                     }
                     
                     if (options.css && options.css.length) {

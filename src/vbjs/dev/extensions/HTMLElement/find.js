@@ -1,4 +1,4 @@
-define(["sys/models/test-proto", "extension-String/createElement"], test => {
+define(["sys/models/test-proto", "sys/extensions/String/createElement"], test => {
         
     test(HTMLElement, ["find"]);
     

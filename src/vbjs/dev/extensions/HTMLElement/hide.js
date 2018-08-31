@@ -1,4 +1,4 @@
-define(["sys/models/test-proto", "extension-Element/css"], test => {
+define(["sys/models/test-proto", "sys/extensions/HTMLElement/css"], test => {
         
     test(HTMLElement, ["hide"]);
 

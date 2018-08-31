@@ -49,29 +49,8 @@ define(["sys/view-manager/components"], ({getTags})  => {
         getViewType: getViewType,
         showView: showView,
         templateRendered: templateRendered,
-        moduleRendered: moduleRendered,
+        moduleRendered: moduleRendered
 
-        prepareParams: async params => {
-            if (params instanceof Promise) {
-                return await params
-            }
-            if (typeof params !== "object") {
-                params = {
-                    value: params
-                }
-            }
-            return params
-        },
-        
-        prepareInstance: inst => {
-            inst.components = null;
-            inst.watch = (...components) =>  {
-                if (!components || !components.length) {
-                    components = getTags();
-                }
-                inst.components = components.map(i => i.toUpperCase());
-            }
-        }
     }
 
  });

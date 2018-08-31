@@ -1,4 +1,4 @@
-define(["extension-Element/forEachChild"], () => class {
+define(["sys/extensions/HTMLElement/forEachChild"], () => class {
 
     constructor({
         model, 

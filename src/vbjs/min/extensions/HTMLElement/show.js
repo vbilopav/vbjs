@@ -1,1 +1,1 @@
-define(["sys/models/test-proto","extension-Element/css"],e=>{e(HTMLElement,["show"]),HTMLElement.prototype.show=function(e){return void 0===e||e?(this.css("display",""),this):this.hide()}});
+define(["sys/models/test-proto","sys/extensions/HTMLElement/css"],s=>{s(HTMLElement,["show"]),HTMLElement.prototype.show=function(s){return void 0===s||s?(this.css("display",""),this):this.hide()}});
