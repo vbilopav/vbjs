@@ -1,10 +1,10 @@
 const Builder = require("./builder");
 const builder = new Builder("../vbjs/dev/");
 
-builder.buildMin("../vbjs/min/");
+builder.buildMin("../vbjs/dist/version/min/");
 
 builder.buildBundle({
-    bundleDir: "../vbjs/bundle/", 
+    bundleDir: "../vbjs/dist/version/bundle/", 
     entryPoint: "main", 
     pluginsPath: "require-plugins",
     indexModule: "vbjs",

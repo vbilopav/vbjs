@@ -10,10 +10,15 @@ const {
 } = require("./fs");
 
 const getVersion = () => {
-    let contents = fs.readFileSync("../vbjs/package.json");
-    let jsonContent = JSON.parse(contents);
-    return jsonContent.version;
+    try {
+        let contents = fs.readFileSync("../vbjs/package.json");
+        let jsonContent = JSON.parse(contents);
+        return jsonContent.version;
+    } catch(error) {
+        return "";
+    }
 }
+const version = getVersion();
 
 class Builder {
 
@@ -23,7 +28,7 @@ class Builder {
     }
 
     buildMin(minDir) {
-        this.minDir = cleanPath(minDir);
+        this.minDir = cleanPath(minDir.replace("version", version));
         
         console.log(`>>> Removing min dir ${this.minDir}`);
         rmdirSync(this.minDir);
@@ -60,7 +65,7 @@ class Builder {
 
         const shouldSkip = id => skip.includes(id);
 
-        this.bundleDir = cleanPath(bundleDir);
+        this.bundleDir = cleanPath(bundleDir.replace("version", version));
         console.log(`>>> Removing min dir ${this.bundleDir}`);
         rmdirSync(this.bundleDir);
         mkDirByPathSync(this.bundleDir);
@@ -117,7 +122,6 @@ class Builder {
             entryPointContent.substring(close, entryPointContent.length);
         content += entryPointContent;
 
-        let version = getVersion();
         indexContent = 
             "/* vbjs " + version + " */" + os.EOL + indexContent.replace("const configure=()=>{}", "const configure=()=>{" + content + "}");
         

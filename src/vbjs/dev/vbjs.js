@@ -106,8 +106,8 @@
         __appObjName: appObjectName,
         paths: {
             libs: libsPath,
-            text: ["https://cdnjs.cloudflare.com/ajax/libs/require-text/2.0.12/text.min", libsPath + "/requirejs-text/text"],
             sys: sysPath,
+            "text": sysPath + "/require-plugins/text",
             "template": sysPath + "/require-plugins/template",
             "document": sysPath + "/require-plugins/document",
             "composite": sysPath + "/require-plugins/composite",
