@@ -59,7 +59,7 @@ define([], () => class {
         return Object.keys(this._routes).map(name => {
             let route = this._routes[name],
                 data = route.data || {};
-            data.url = "/" + this._hash + name;
+            data.url = document.location.pathname + this._hash + name;
             data.id = route.id;
             data.active = this._current === route
             return data;

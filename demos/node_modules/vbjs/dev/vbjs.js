@@ -2,35 +2,6 @@
 
     const configure = () => {}
 
-    const 
-        relative = function(from, to) {
-            from = (from[0] === '/' || from[0] === '.' ? from : '/' + from);
-            to = (to[0] === '/' || to[0] === '.' ? to : '/' + to);
-            const
-                lowerFrom = from.toLowerCase(),
-                lowerTo = to.toLowerCase(),
-                toParts = to.split('/'),
-                lowerFromParts = lowerFrom.split('/'),
-                lowerToParts = lowerTo.split('/');
-                length = Math.min(lowerFromParts.length, lowerToParts.length),
-                samePartsLength = length;
-            for (var i = 0; i < length; i++) {
-                if (lowerFromParts[i] !== lowerToParts[i]) {
-                    samePartsLength = i;
-                    break;
-                }
-            }
-            if (samePartsLength == 0) {
-                return to.endsWith("/") ? to.substring(0, to.length-1) : to;
-            }
-            var outputParts = [];
-            for (var i = samePartsLength; i < lowerFromParts.length; i++) {
-                outputParts.push('..');
-            }
-            outputParts = outputParts.concat(toParts.slice(samePartsLength));
-            return outputParts.join('/');
-        };
-
     const
         defaults = {
             version: "",
@@ -41,7 +12,63 @@
             appElementId: "app",
             appObjectName: "_app",
         }
-        
+
+    const 
+        relative = (from, to) => {
+            const 
+                normalizeArray = (parts, allowAboveRoot) => {
+                    let res = [];
+                    for (let i = 0; i < parts.length; i++) {
+                        let p = parts[i];
+
+                        // ignore empty parts
+                        if (!p || p === '.') {
+                            continue;
+                        }
+
+                        if (p === '..') {
+                            if (res.length && res[res.length - 1] !== '..') {
+                                res.pop();
+                            } else if (allowAboveRoot) {
+                                res.push('..');
+                            }
+                        } else {
+                            res.push(p);
+                        }
+                    }
+                    return res;
+                },
+                resolve = function() {
+                    let resolvedPath = '', resolvedAbsolute = false;
+                    for (let i = arguments.length - 1; i >= -1 && !resolvedAbsolute; i--) {
+                        let path = (i >= 0) ? arguments[i] : "";
+                        resolvedPath = path + '/' + resolvedPath;
+                        resolvedAbsolute = path[0] === '/';
+                    }
+                    resolvedPath = normalizeArray(resolvedPath.split('/'), !resolvedAbsolute).join('/');
+                    return ((resolvedAbsolute ? '/' : '') + resolvedPath) || '.';
+                };
+
+            from = resolve(from).substr(1);
+            to = resolve(to).substr(1);
+            let fromParts = from.split('/').filter(e => e.length !== 0);
+            let toParts = to.split('/').filter(e => e.length !== 0);
+            let length = Math.min(fromParts.length, toParts.length);
+            let samePartsLength = length;
+            for (let i = 0; i < length; i++) {
+                if (fromParts[i] !== toParts[i]) {
+                    samePartsLength = i;
+                    break;
+                }
+            }
+            let outputParts = [];
+            for (let i = samePartsLength; i < fromParts.length; i++) {
+                outputParts.push('..');
+            }
+            outputParts = outputParts.concat(toParts.slice(samePartsLength));
+            return outputParts.join('/');
+        };
+
     const
         scr = document.currentScript,
         dev = scr.getAttribute("data-dev") === null ? true : eval(scr.getAttribute("data-dev")),
@@ -71,7 +98,8 @@
             view: viewModule,
             elementId: appElementId,
             name: appObjectName
-        }
+        },
+        relative: relative
     };
 
     if (!libsUrl) {
@@ -95,7 +123,7 @@
             let script = document.createElement("link");
             script.rel  = 'stylesheet';
             script.type = 'text/css';
-            script.href = cssUrl + "/" + cssFiles[i] + (version ? "?" + require.urlArgs : "");
+            script.href = cssUrl + (cssUrl.endsWith("/") ? "" : "/") + cssFiles[i] + (version ? "?" + require.urlArgs : "");
             script.media = 'all';
             document.head.appendChild(script);
         }
@@ -137,4 +165,3 @@
     });
 
 })();
-

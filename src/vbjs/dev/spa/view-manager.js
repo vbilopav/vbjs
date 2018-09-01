@@ -177,7 +177,7 @@ define([
 
             reveal({id, view, params, uri, elementOrId: elementId}).then(result => {
                 this._views[id] = result.data;
-                this._container.append(result.element);
+                this._container.appendChild(result.element);
                 this._current = result.element;
                 utils.showView(result.data, result.element);
                 return resolve(result.element.id);
