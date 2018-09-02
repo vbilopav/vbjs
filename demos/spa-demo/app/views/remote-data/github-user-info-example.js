@@ -1,5 +1,10 @@
 define([], () => class {
 
+    constructor({options}) {
+        options.context = this;
+        this.username = "vbilopav"; // default value for the model element username
+    }
+
     render({element}) {
         element.html(
             String.html`
@@ -10,9 +15,6 @@ define([], () => class {
                 <button name="show" onclick="showClick">Show github user data</button>
             </p>`
         );
-
-        this.username = "vbilopav"; // default value for the model element username
-        this.model = new _app.Model().bind(element, this);
     }
 
     showClick() {

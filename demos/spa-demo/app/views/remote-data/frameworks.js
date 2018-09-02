@@ -1,5 +1,9 @@
 define([], () => class {
      
+    constructor({options}) {
+        options.context = this;
+    }
+
     render() { 
         return String.html`
         <div>
@@ -13,10 +17,7 @@ define([], () => class {
         </div>`
     }
     
-    //
-    //
-    //
-    async rendered({element}) {
+    async rendered() {
         let 
             data = await(await fetch("../shared/frameworks.json", {cache: "no-store"})).json(),
             anchorsHtml = Object.keys(data).map(
@@ -24,7 +25,7 @@ define([], () => class {
             ).join("");
 
         // rendered event will only be triggered once since this view doesn't allow params
-        new _app.Model().bind(element).anchors = anchorsHtml;
+        this.model.anchors = anchorsHtml;
     }
     
 })

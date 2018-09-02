@@ -1,1 +1,0 @@
-define(["sys/app"],e=>n=>{return e.render(e.config.view,document.getElementById(n).html(""),document.location.search?(e=>e.slice(e.indexOf("?")+1).match(/[\w\d%\-!.~'()\*]+=[\w\d%\-!.~'()\*]+/g).map(e=>e.split("=").map(decodeURIComponent)).reduce((e,[n,c])=>Object.assign(e,{[n]:c}),{}))(document.location.search):{})});

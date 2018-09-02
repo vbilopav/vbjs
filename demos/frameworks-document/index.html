@@ -12,40 +12,44 @@
   </head>
   <body>
 
-    <div id="app">
+    <div>
         <script src="../shared/loading.js"></script>
+        <template id="frameworks">
+            <div class="container-fluid">
+              <p class="text-center">
+                <h2>JavaScript application frameworks</h2>
+              </p>
+              ${async () => this.template.forEach(await _app.fetch("../shared/frameworks.json"), (name, item) => 
+                  `<div class="panel panel-default">
+                      <div class="panel-heading">${name}</div>
+                      <ul class="list-group">
+                          ${this.template.forEach(item, (key, value) => 
+                              `<li class="list-group-item">
+                                  <strong>${key}: </strong>${value}
+                              </li>`
+                          )}
+                      </ul>
+                  </div>`
+              )}
+            </div>
+            ${
+            <script>
+                () => this.template.rendered = element => {
+                    console.log("Template rendered into element:");
+                    console.log(element);
+                    console.log();
+                }
+            </script>
+            }
+          </template>
     </div>
 
-    <template id="frameworks">
-      <div class="container-fluid">
-        <p class="text-center">
-          <h2>JavaScript application frameworks</h2>
-        </p>
-        ${async () => this.template.forEach(await _app.fetch("../shared/frameworks.json"), (name, item) => 
-            `<div class="panel panel-default">
-                <div class="panel-heading">${name}</div>
-                <ul class="list-group">
-                    ${this.template.forEach(item, (key, value) => 
-                        `<li class="list-group-item">
-                            <strong>${key}: </strong>${value}
-                        </li>`
-                    )}
-                </ul>
-            </div>`
-        )}
-      </div>
-      ${
-      <script>
-          () => this.template.rendered = element => {
-              console.log("Template rendered into element:");
-              console.log(element);
-              console.log();
-          }
-      </script>
-      }
-    </template>
-
-    <script data-view-module="document!frameworks" src="../node_modules/vbjs/dist/1.1.7/bundle/vbjs.js"></script>
+    <!--render in template parent, data-app-container-id empty -->
+    <script 
+        data-view-module="document!frameworks" 
+        data-app-container-id="" 
+        src="../node_modules/vbjs/dist/1.1.8/bundle/vbjs.js">
+    </script>
     <!--<script data-view-module="document!frameworks" src="https://cdn.rawgit.com/vbilopav/vbjs/master/src/vbjs/dist/1.1.7/bundle/vbjs.js"></script>-->
 
   </body>

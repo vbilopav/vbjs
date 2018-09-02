@@ -1,7 +1,11 @@
 define([], () => class {
+
+    constructor({options}) {
+        options.context = this;
+    }
      
     render({params}) {
-        let name = params;
+        let name = params.value;
         return String.html`
         <style>
             .framowrk-label {
@@ -53,13 +57,8 @@ define([], () => class {
         </div>`
     }
 
-    rendered({params, element}) {
-        this.model = new _app.Model().bind(element);
-        this.changed({params});
-    }
-
-    async changed({params}) {
-        let name = params,
+    async rendered({params}) {
+        let name = params.value,
             data = await(await fetch("../shared/frameworks.json")).json(),
             item = data[name];
         if (item) {
@@ -78,12 +77,4 @@ define([], () => class {
             });
         }
     }
-
-    //
-    // We want render to be called only once and to remember the model. 
-    // Model is reassigned with new data on changed event.
-    // We leave this empty to ensure that view is rendered only once
-    //
-    change() { }
-
 })

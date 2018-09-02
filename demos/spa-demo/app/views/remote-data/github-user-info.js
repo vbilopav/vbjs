@@ -8,7 +8,7 @@ define([], () => class {
     }
 
     async render({params}) {
-        let user = params;
+        let user = params.value;
         let response = await fetch(`https://api.github.com/users/${user}`);
         let result = String.html`
             <p>

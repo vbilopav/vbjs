@@ -22,7 +22,7 @@ define([
 ], (_app, Model, {reveal}) => {
 
     _app.Model = Model;
-    _app.import = m => new Promise(resolve => require(m, r => resolve(r)));
+    _app.import = m => new Promise(resolve => require([m], r => resolve(r)));
     _app.fetch = async (url, opts) => await(await fetch(url, opts)).json();
     _app.render = async (view, elementOrId, params) => 
         await reveal({view: view, elementOrId: elementOrId, params: params});

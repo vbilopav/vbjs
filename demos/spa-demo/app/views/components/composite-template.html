@@ -26,13 +26,17 @@
         Because of that, this entire view is rendered after one second.
         <br />
         <br />
-        ${() => {
-            let [part1, part2, part3, part4] = this.template.import("composite!views/components/composed-template.html")();
-            this.compontent1 = part1;
-            this.compontent2 = part2;
-            this.compontent3 = part3;
-            this.compontent4 = part4;
-        }}
+        ${
+            <script>
+            () => {
+                let [part1, part2, part3, part4] = this.template.import("composite!views/components/composed-template.html")();
+                this.compontent1 = part1;
+                this.compontent2 = part2;
+                this.compontent3 = part3;
+                this.compontent4 = part4;
+            }
+            </script>
+        }
         <hr />
         compontent1:
         <br />

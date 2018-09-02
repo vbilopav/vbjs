@@ -78,7 +78,7 @@
         sysUrl = scr.getAttribute("src").replace("vbjs.js", ""),
         appModule = scr.getAttribute("data-app-module") === null ? defaults.appModule : scr.getAttribute("data-app-module"),
         viewModule = scr.getAttribute("data-view-module"),
-        appElementId = scr.getAttribute("data-app-container-id") || defaults.appElementId,
+        appElementId = scr.getAttribute("data-app-container-id") === null ? defaults.appElementId : scr.getAttribute("data-app-container-id"),
         appObjectName = scr.getAttribute("data-app-object-name") || defaults.appObjectName,
         settings = eval("(" + scr.getAttribute("data-settings") + ")") || {usePreloadedTemplates: false, stripScriptTagsInTemplates: true},
         cssFilesattrValue = scr.getAttribute("data-css-files");

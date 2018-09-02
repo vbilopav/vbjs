@@ -54,8 +54,8 @@ define([
                         if (params.template) {
                             !params.template[name] || params.template[name](value);
                         }
-                        if (params.__instance) {
-                            params.__instance[name] = value;
+                        if (params.__parent) {
+                            params.__parent[name] = value;
                         }
                     }
                 });
@@ -252,11 +252,9 @@ define([
                                 options.components = components.map(i => i.toUpperCase());
                             }
                         };
-                        
-                    //utils.prepareInstance(options);
                     data.instance = new view({id: id, element: element, options: options}, ...injected);
                     data.instance._options = options;
-                    params.__instance = data.instance;
+                    params.__parent = data.instance;
 
                     if (params.___extra) {
                         for(let [key, value] of Object.entries(params.___extra)) {
