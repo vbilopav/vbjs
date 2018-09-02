@@ -143,31 +143,28 @@ define([
                     resolveView = () => {
                         const 
                             contentFunc = c => {
-                            if (typeof c === "function" || c instanceof Array) {
-                                c = app.parse(...c);
-                                c.then(s => {
-                                    if (typeof s === "string") {
-                                        element.html(s);
+                                if (typeof c === "function" || c instanceof Array) {
+                                    c = app.parse(...c);
+                                    c.then(s => {
+                                        if (typeof s === "string") {
+                                            element.html(s);
+                                        } else {
+                                            element.html("").appendChild(s);
+                                        }
+            
+                                    })
+                                } else if (typeof c === "string" || c instanceof HTMLElement) {
+                                    if (typeof c === "string") {
+                                        element.html(c);
                                     } else {
-                                        element.html("").append(s);
+                                        element.html("").appendChild(c);
                                     }
-                                    
-                                    revealComponents(element, data.instance._options, data.instance);
-                                    utils.moduleRendered(data.instance, {params: params, element: element});
-        
-                                })
-                            } else if (typeof c === "string" || c instanceof HTMLElement) {
-                                if (typeof c === "string") {
-                                    element.html(c);
-                                } else {
-                                    element.html("").append(c);
                                 }
-                                
+
                                 revealComponents(element, data.instance._options, data.instance);
                                 utils.moduleRendered(data.instance, {params: params, element: element});
-        
-                            }
                             };
+
                         if (type === utils.types.class) {
                             let content = data.instance.render({params: params, element: element});
                             if (typeof content === "function" || content instanceof Array) {
@@ -218,7 +215,7 @@ define([
         
                     } else if (result instanceof HTMLElement) {
         
-                        element.html("").append(result);
+                        element.html("").appendChild(result);
                         revealComponents(element, params.template, params);
                         utils.templateRendered(params, element);
 
@@ -229,7 +226,7 @@ define([
                             if (typeof r === "string") {
                                 element.html(r);
                             } else {
-                                element.html("").append(r);
+                                element.html("").appendChild(r);
                             }
                             
                             revealComponents(element, params.template, params);

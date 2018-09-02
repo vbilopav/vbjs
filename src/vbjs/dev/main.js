@@ -7,7 +7,6 @@ define([
     "sys/extensions/HTMLElement/forEachChild",
     "sys/extensions/HTMLElement/show",
     "sys/extensions/HTMLElement/hide",
-    "sys/extensions/HTMLElement/appendTo",
     "sys/extensions/HTMLElement/on",
     "sys/extensions/HTMLElement/html",
     "sys/extensions/String/hashCode",

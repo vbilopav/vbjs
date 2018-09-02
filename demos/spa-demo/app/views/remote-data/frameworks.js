@@ -18,7 +18,7 @@ define([], () => class {
     //
     async rendered({element}) {
         let 
-            data = await(await fetch("/remote-data-example/frameworks.json", {cache: "no-store"})).json(),
+            data = await(await fetch("../shared/frameworks.json", {cache: "no-store"})).json(),
             anchorsHtml = Object.keys(data).map(
                 item => `<a href="#/remote-data-example/details/${item}">View details for ${item}</a><br />`
             ).join("");

@@ -1,1 +1,0 @@
-define(["sys/models/test-proto"],e=>{e(HTMLElement,["appendTo"]),HTMLElement.prototype.appendTo=function(e){return e.append(this),this}});

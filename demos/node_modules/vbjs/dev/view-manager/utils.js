@@ -3,7 +3,7 @@ define(["sys/view-manager/components"], ({getTags})  => {
     const 
         isTemplate = name => name.indexOf("template!") !== -1 || name.indexOf("document!") !== -1,
         prefix = "_view",
-        getId = uriHash => prefix + uriHash,
+        getId = uriHash => prefix + "-" + uriHash,
         types = {template: 1, class: 2, string: 3},
         getViewType = (view, name) => {
             let t = typeof view;

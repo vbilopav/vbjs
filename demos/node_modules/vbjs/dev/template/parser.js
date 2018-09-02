@@ -20,7 +20,7 @@ define([
             if (sub instanceof Promise) {
                 promises.push({index: i, sub: sub});
             }
-            if (typeof sub !== "string") {
+            if (sub === undefined || typeof sub === "object") {
                 subs[i] = "";
             }
         }
@@ -38,7 +38,7 @@ define([
                     }
                     sub = result === undefined || typeof result === "function" ? "" : result;
                 }
-                subs[promise.index] = typeof sub !== "string" ? "" : sub;
+                subs[promise.index] = sub === undefined || typeof sub === "object" ? "" : sub;
             }
             return String.raw(pieces, ...subs);
         })();

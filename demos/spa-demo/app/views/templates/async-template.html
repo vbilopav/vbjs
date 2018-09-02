@@ -13,7 +13,7 @@
         Example, fetching remote data inside template.
 <pre>
 &dollar;{
-    async () => this.data = await(await fetch("/remote-data-example/frameworks.json", {cache: "no-store"})).json()
+    async () => this.data = await(await fetch("../shared/frameworks.json", {cache: "no-store"})).json()
 }
 </pre>
     <br />
@@ -33,7 +33,7 @@
 <br />
 Or, it can all be done in one single async expression:
 <pre>
-&dollar;{async () => this.template.forEach(await(await fetch("/remote-data-example/frameworks.json", {cache: "no-store"})).json(), (name1, value1) =&gt; 
+&dollar;{async () => this.template.forEach(await(await fetch("../shared/frameworks.json", {cache: "no-store"})).json(), (name1, value1) =&gt; 
     &#96;&lt;p&gt;
         &dollar;{name1}
         &dollar;{this.template.forEach(value1, (name2, value2) =&gt; 
@@ -47,7 +47,7 @@ Or, it can all be done in one single async expression:
     <br />
     And here are the results:
     <br /><hr />
-    ${async () => this.template.forEach(await(await fetch("/remote-data-example/frameworks.json", {cache: "no-store"})).json(), (name1, value1) => 
+    ${async () => this.template.forEach(await(await fetch("../shared/frameworks.json", {cache: "no-store"})).json(), (name1, value1) => 
         `<p>
             ${name1}
             ${this.template.forEach(value1, (name2, value2) => 

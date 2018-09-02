@@ -61,7 +61,8 @@ define([
 
                 if (found.type === utils.types.template) {
                     if (!element.length) {
-                        element = "span".createElement(elementId).appendTo(this._container);
+                        element = "span".createElement(elementId);
+                        this._container.appendChild(element);
                     }
                     if (found.uriHash !== uriHash) {
                         let result = found.instance(params);
@@ -73,7 +74,7 @@ define([
 
                         } else if (result instanceof HTMLElement) {
                             
-                            element.html("").append(result);
+                            element.html("").appendChild(result);
                             revealComponents(element, params.template, params);
                             utils.templateRendered(params, element);
                             
@@ -83,7 +84,7 @@ define([
                                 if (typeof r === "string") {
                                     element.html(r);
                                 } else {
-                                    element.html("").append(r);
+                                    element.html("").appendChild(r);
                                 }
 
                                 revealComponents(element, params.template, params);
@@ -104,7 +105,8 @@ define([
                     }
                 }
                 if (!element.length) {
-                    element = "span".createElement(elementId).appendTo(this._container);
+                    element = "span".createElement(elementId);
+                    this._container.appendChild(element);
                 }
 
                 if (found.type === utils.types.class) {
@@ -129,26 +131,22 @@ define([
                                     if (typeof s === "string") {
                                         element.html(s).show();
                                     } else {
-                                        element.html("").append(s).show();
+                                        element.html("").appendChild(s)
+                                        element.show();
                                     }
-
-                                    revealComponents(element, data.instance._options, data.instance);
-                                    utils.moduleRendered(found.instance, {params: params, element: element}, false);
-
-                                    showFunc();
                                 })
                             } else if (typeof c === "string" || c instanceof HTMLElement) {
                                 if (typeof c === "string") {
                                     element.html(c).show();
                                 } else {
-                                    element.html("").append(c).show();
+                                    element.html("").element(c); 
+                                    element.show();
                                 }
-                                
-                                revealComponents(element, data.instance._options, data.instance);
-                                utils.moduleRendered(found.instance, {params: params, element: element}, false);
-
-                                showFunc();
                             }
+
+                            revealComponents(element, found.instance._options, found.instance);
+                            utils.moduleRendered(found.instance, {params: params, element: element}, false);
+                            showFunc();
                         }
 
                         if (typeof newContent === "function") {
@@ -186,3 +184,4 @@ define([
         });
     }
  });
+ 

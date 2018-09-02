@@ -60,7 +60,7 @@ define([], () => class {
 
     async changed({params}) {
         let name = params,
-            data = await(await fetch("/remote-data-example/frameworks.json")).json(),
+            data = await(await fetch("../shared/frameworks.json")).json(),
             item = data[name];
         if (item) {
             this.model.name = name;

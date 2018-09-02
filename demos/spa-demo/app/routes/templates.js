@@ -91,7 +91,7 @@ define([], () => {
                 if (params.length !== 0) {
                     return false;
                 }
-                const response = await fetch("/remote-data-example/frameworks.json", {cache: "no-store"});
+                const response = await fetch("../shared/frameworks.json", {cache: "no-store"});
                 return {
                     data: await response.json()
                 }
