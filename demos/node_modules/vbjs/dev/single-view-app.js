@@ -1,5 +1,5 @@
 define(
-    ["sys/app"], (app) => 
+    ["sys/app"], app => 
         id => {
             const parseQueryString = input => 
                 input.slice(input.indexOf('?') + 1)
@@ -8,9 +8,21 @@ define(
                 .reduce((obj, [key, value]) => Object.assign(obj, { [key]: value }), {});
             app.queryString = document.location.search ? parseQueryString(document.location.search) : {};
             let element;
-            if (app.config.view.startsWith("document!") && !id) {
-                id = app.config.view.replace("document!", "");
-                element = (document.getElementById(id) || document.getElementsByName(id)).parentElement;
+            if (app.config.view.startsWith("document!") && (!id || id==="app")) {
+                let getElement = () => {
+                    id = app.config.view.replace("document!", "");
+                    return (document.getElementById(id) || document.getElementsByName(id)).parentElement;
+                }
+                if (!id) {
+                    element = getElement();
+                } else {
+                    element = document.getElementById(id);
+                    if (!element) {
+                        id = app.config.view.replace("document!", "");
+                        element = getElement();
+                    }
+                }
+                
             } else {
                 element = document.getElementById(id).html("");
             }
