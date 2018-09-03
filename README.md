@@ -1,4 +1,4 @@
-[![npm version](https://badge.fury.io/js/vbjs.svg)](https://www.npmjs.com/package/vbjs)
+[![npm version](https://badge.fury.io/js/vbjs.svg)](https://badge.fury.io/js/vbjs)
 [![License](https://img.shields.io/badge/license-MIT%20License-brightgreen.svg)](https://github.com/vbilopav/vbjs/blob/master/src/vbjs/LICENSE.md)
 
 ## vbjs
