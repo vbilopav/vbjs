@@ -1,0 +1,1 @@
+define(["sys/models/test-proto"],t=>{t(HTMLElement,["attr"]),HTMLElement.prototype.attr=function(t,e){return void 0===e?this.getAttribute(t):(this.setAttribute(t,e),this)}});

@@ -1,0 +1,1 @@
+define(["sys/models/test-proto"],t=>{t(HTMLElement,["on"]),HTMLElement.prototype.on=function(t,e){for(let n of t.split(" "))this.addEventListener(n,e);return this}});

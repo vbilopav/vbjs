@@ -1,0 +1,1 @@
+define(["sys/app"],s=>({parse:i=>s.settings.stripScriptTagsInTemplates?-1===i.indexOf("<s")?i:i.split(/<script>/).join("").split(/<\/script>/).join(""):i}));
