@@ -46,7 +46,8 @@ It's a JavaScript framework built for simplicity, speed, productivity and with m
     </div>
 
     <script 
-        data-view-module="document!data" src="https://cdn.rawgit.com/vbilopav/vbjs/master/src/vbjs/dist/1.1.9/bundle/vbjs.js">
+        data-view-module="document!data"
+        src="https://cdn.rawgit.com/vbilopav/vbjs/master/src/vbjs/dist/1.1.9/bundle/vbjs.js">
     </script>
 
   </body>
