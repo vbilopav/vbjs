@@ -11,7 +11,6 @@ Built for simplicity and speed. Minimal dependency, minimal, almost no configura
 
 - [What is it?](#what-is-it)
 - [Motivation](#motivation)
-- [How it works?](#how-it-works)
 - [Installation](#installation)
 - [Simple usage example](#usage)
 - [Roadmap](#roadmap)
@@ -22,7 +21,9 @@ Built for simplicity and speed. Minimal dependency, minimal, almost no configura
 
 ## What is it?
 
-It's a JavaScript framework built for simplicity, speed, productivity and with minimal configuration.
+It's a JavaScript application framework built for simplicity, speed, productivity and with minimal configuration.
+
+Want to display simple data from your back-end endpoint on your page?
 
 ```html
 <!DOCTYPE html>
@@ -36,11 +37,11 @@ It's a JavaScript framework built for simplicity, speed, productivity and with m
     <div>
         <template id="data">
             <ul>
-              ${async () => this.template.forEach(await(await fetch("/endpont/")).json(), value => 
-                `<li>
+              ${async () => this.template.forEach(await(await fetch("/endpoint/")).json(), value => `
+                <li>
                     ${value}
-                </li>`
-              )}
+                </li>
+              `)}
             </div>
           </template>
     </div>
@@ -54,3 +55,22 @@ It's a JavaScript framework built for simplicity, speed, productivity and with m
 </html>
 
 ```
+
+... and that is it, only **one file** with **one dependency**.
+
+No configuration, no transpilation, no preparsing, no pre-pars-trans-compilation, no special syntax, magic strings or keywords whatsoever and no long and cryptic configuration files.
+
+
+However, that doesn't mean that this library doesn't support more advanced stuff like *template files*, *modules*, *components* and *model binding*.
+
+Contrary...
+
+## [Motivation](https://hackernoon.com/how-it-feels-to-learn-javascript-in-2016-d3a717dd577f)
+
+Honestly, world doesn't need yet another JavaScript framework.
+
+This is (or it least it was) - a weekend, experimental and educational pet project. 
+
+I started experimenting with and learning new JavaScript features. I was also bit curious how could I implement intelligently some of common JavaScript needs that I've been using for serious projects at that time. 
+
+After while as development and experimentation continued it became something really fun that I enjoyed working and it showed that it can be very useful, so I decided to continue and press on. 
