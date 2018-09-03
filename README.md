@@ -1,4 +1,4 @@
-[![npm badge][npm-badge-png]][package-url]
+[![npm version](https://badge.fury.io/js/vbjs.svg)](https://badge.fury.io/js/vbjs)
 
 ## vbjs
 
