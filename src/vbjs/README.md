@@ -130,9 +130,8 @@ There is already ultra simple generic example in opening chapter [what is it?](#
 
 There is also, entire [demo folder](https://github.com/vbilopav/vbjs/tree/master/demos) with (at this point) around 14 comprehensive examples (it keeps increasing) and demo applications that you can safely browse and experiment with.
 
-Note that one of those is [spa-demo](https://github.com/vbilopav/vbjs/tree/master/demos/spa-demo) that is little bit bigger single-page-application with around 40 different views or pages implemented and each of those page is example fir itself, so if counting that single-page-application itself that would be 1+40+14=55 examples in total. Plus this one introductory example. That is around 52 examples and demos. Pretty solid.
+Note that one of those is [spa-demo](https://github.com/vbilopav/vbjs/tree/master/demos/spa-demo) that is little bit bigger single-page-application with around 40 different views or pages implemented and each of those page is example fir itself, so if counting that single-page-application itself that would be 1+40+14=55 examples in total. Plus this one introductory example. That is around 52 examples and demos. Pretty solid for now, there will be more.
 
-I plan to add one more real-world example.
 
 
 ## Roadmap
