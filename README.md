@@ -1,7 +1,7 @@
 [![npm version](https://badge.fury.io/js/vbjs.svg)](https://badge.fury.io/js/vbjs)
 [![License](https://img.shields.io/badge/license-MIT%20License-brightgreen.svg)](https://github.com/vbilopav/vbjs/blob/master/src/vbjs/LICENSE.md)
 
-# vbjs app framework
+# vbjs javascript library
 
 Built for simplicity and speed. Minimal dependency, minimal, almost no configuration, no special framework-specific syntax to be learned, minimal api, minimal learning curve, high productivity. 
 
@@ -12,14 +12,15 @@ Built for simplicity and speed. Minimal dependency, minimal, almost no configura
 - [What is it?](#what-is-it)
 - [Motivation](#motivation)
 - [Installation](#installation)
-- [Some examples](#some-examples)
+- [Examples](#examples)
 - [Roadmap](#roadmap)
 - [How to Contribute](#how-to-contribute)
 - [License](#license)
 
 ## What is it?
 
-It's a JavaScript application framework built for simplicity, speed, productivity and with minimal configuration.
+It's a JavaScript library for rapid application development of modern JavaScript application - or - application framework - built for simplicity, speed, productivity and with minimal configuration.
+
 
 Want to display simple data from your back-end endpoint on your page?
 
@@ -56,35 +57,26 @@ Want to display simple data from your back-end endpoint on your page?
 
 ... and that is it, only **one file** with **one dependency**. 
 
-No new tags or attributes or syntax.
+No new tags or attributes or syntax. No huge configuration files. Nothing new to learn. Very simple and familiar API. No configuration. No transpilation. No parsing or preparsing. No pre-pars-trans-compilation. No special syntax, no magic strings or keywords whatsoever and no long and cryptic configuration files.
 
-No huge configuration files. 
+Yes, yes, I know, I forgot to include 100% test coverage via mocha, chai, chai-as-promised, supertest, sinon, istanbul, sonarqube, eslint, ... but I'm not so much into occultism either.
 
-Nothing new to learn. 
+What *is* in there, however:
 
-Very simple and familiar API.
+- Advanced templating engine and templating support with using just JavaScript template syntax
+- Views, view templates and view modules (module loader included by default)
+- Model bindings, dom extensions
+- Single-page-applications, client router, view engine, dependency injection and more
+- Async support from bottom up - everywhere
 
-No configuration.
-
-No transpilation. 
-
-No parsing or preparsing.
-
-No pre-pars-trans-compilation, 
-
-No special syntax, no magic strings or keywords whatsoever and no long and cryptic configuration files.
-
-However, that doesn't mean that this library doesn't support more advanced stuff like *template files*, *modules*, *components*, *model binding*, *client url router*, *single page applications*, and more...
-
-Contrary...
-
-Anyway, current minified bundle size is at *27.2KB* (*8.3KB* gzipped).
+For current list of features and capabilities check out documentation or demos. Current minified bundle size is at **27.2KB** (**8.3KB** gzipped).
 
 ## [Motivation](https://hackernoon.com/how-it-feels-to-learn-javascript-in-2016-d3a717dd577f)
 
-Honestly, world doesn't need yet another JavaScript framework.
+Honestly, world doesn't need yet another JavaScript framework. Or even library.
 
-This is (or it least it was) - a weekend, experimental and educational pet project. I just love to code.
+This is (or it least it was) - a weekend, experimental and educational pet project. I simply love to code.
+
 
 I started experimenting with and learning new JavaScript features and I was also bit curious how could I implement intelligently some of common JavaScript needs and concepts that I've been using for serious projects at that time. 
 
@@ -92,7 +84,7 @@ After while as development and experimentation continued it became something rea
 
 I tried really hard to keep it as simple and concise as possible and close to official JavaScript/HTML modern standards as possible. 
 
-Everybody is already is already feeling framework and configuration fatigue. 
+Everybody is already feeling framework and configuration fatigue. 
 
 I'd like to consider this as simple library to boost your vanilla JavaScript development.
 
@@ -100,7 +92,7 @@ I'd like to consider this as simple library to boost your vanilla JavaScript dev
 
 This library is hosted on [github](https://github.com/vbilopav/vbjs) and distributed via [npm](https://www.npmjs.com/package/vbjs).
 
-For installation from github simply download and cloe source code from github, distribution directory is included.
+For installation from github simply download and clone source code from github, distribution directory (dist) is included.
 
 
 For installation from npm, just run:
@@ -113,7 +105,8 @@ That will install library globally, which is fine, but we actually recommend loc
 npm install --save-dev vbjs
 ```
 
-Not that you have already npm initialized in directory and package.json created.
+Note that you have to have already npm initialized in directory and package.json created.
+
 
 And after that, all you need to include `script` tag into your start page, usually `index.html` or similar with following attributes:
 
@@ -131,13 +124,15 @@ Note that you can also point `src` attribute reference to library on internet ov
 There are few more attributes that can be set to your `script` element that help you configure further your application. However, those two should are sufficient for most common scenarios. Almost all of 14 [demos](https://github.com/vbilopav/vbjs/tree/master/demos) are using those two. For more info information on additional attributes please consult [documentation](tbd) or even better directly [source code](https://github.com/vbilopav/vbjs/blob/master/src/vbjs/dev/vbjs.js#L72).
 
 
-## Some examples
+## Examples
 
 There is already ultra simple generic example in opening chapter [what is it?](#what-is-it).
 
-There is also entire [demo folder](https://github.com/vbilopav/vbjs/tree/master/demos) with (at this point) 14 comprehensive examples and demo applications that you can safely browse and experiment with.
+There is also, entire [demo folder](https://github.com/vbilopav/vbjs/tree/master/demos) with (at this point) around 14 comprehensive examples (it keeps increasing) and demo applications that you can safely browse and experiment with.
 
-Note that one of those 14 demos is under [spa-demo](https://github.com/vbilopav/vbjs/tree/master/demos/spa-demo) dir is little bit bigger single-page-application with around 40 different views or pages implemented and each of those page is example fir itself, so if counting that single-page-application itself that would be 1+40+14=55 examples in total. Plus this one introductory example. That is 52.
+Note that one of those is [spa-demo](https://github.com/vbilopav/vbjs/tree/master/demos/spa-demo) that is little bit bigger single-page-application with around 40 different views or pages implemented and each of those page is example fir itself, so if counting that single-page-application itself that would be 1+40+14=55 examples in total. Plus this one introductory example. That is around 52 examples and demos. Pretty solid.
+
+I plan to add one more real-world example.
 
 
 ## Roadmap
