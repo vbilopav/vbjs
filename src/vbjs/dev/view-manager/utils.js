@@ -26,7 +26,7 @@ define(["sys/view-manager/components"], ({getTags})  => {
                 params.template.model = new _app.Model(params.template.model).bind(element, params.template.context);
             }
             !params.template.rendered || params.template.rendered(element);
-        };
+        },
         moduleRendered = (instance, args, skipChange=true) => {
             if (instance._options.model instanceof _app.Model === false && (instance._options.context || instance._options.model)) {
                 instance.model = new _app.Model(instance._options.model).bind(args.element, instance._options.context);

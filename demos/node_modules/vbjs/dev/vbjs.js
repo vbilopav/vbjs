@@ -6,7 +6,6 @@
         defaults = {
             version: "",
             appUrl: "/",
-            cssUrl: "css",
             libsUrl: null,
             appModule: "sys/single-view-app",
             appElementId: "app",
@@ -70,11 +69,14 @@
         };
 
     const
-        scr = document.currentScript,
+        scr = document.currentScript || document.querySelector("script[type=module]");
+    if (!scr) {
+        throw new Error("Couldn't reference script tag. are you sure you've included script reference? ");
+    }
+    const
         dev = scr.getAttribute("data-dev") === null ? true : eval(scr.getAttribute("data-dev")),
         version = scr.getAttribute("data-version") === null ? defaults.version : scr.getAttribute("data-version"),
         appUrl = scr.getAttribute("data-app-url") === null ? defaults.appUrl : scr.getAttribute("data-app-url"),
-        cssUrl = scr.getAttribute("data-css-url") === null ? defaults.cssUrl : scr.getAttribute("data-css-url"),
         sysUrl = scr.getAttribute("src").replace("vbjs.js", ""),
         appModule = scr.getAttribute("data-app-module") === null ? defaults.appModule : scr.getAttribute("data-app-module"),
         viewModule = scr.getAttribute("data-view-module"),
@@ -90,7 +92,6 @@
         dev: dev,
         version: version,
         appUrl: appUrl,
-        cssUrl: cssUrl,
         sysUrl: sysUrl,
         settings: settings,
         config: {
@@ -123,7 +124,7 @@
             let script = document.createElement("link");
             script.rel  = 'stylesheet';
             script.type = 'text/css';
-            script.href = cssUrl + (cssUrl.endsWith("/") ? "" : "/") + cssFiles[i] + (version ? "?" + require.urlArgs : "");
+            script.href = cssFiles[i] + (version ? "?" + require.urlArgs : "");
             script.media = 'all';
             document.head.appendChild(script);
         }

@@ -110,19 +110,10 @@ Note that you have to have already npm initialized in directory and package.json
 
 And after that, all you need to include `script` tag into your start page, usually `index.html` or similar with following attributes:
 
-- `src`: reference to `vbjs.js` file. This is usually file `vbjs.js` from distribution package that comes in three separate dirs:
-  - `dev` - unminified development source, suitable for development environment
-  - `dist/min` - minified source, suitable for building bundles. Everything not included in bundle is lazy loaded.
-  - `dist/<version>/bundle/` - minified and bundled version, suitable from production environment.
-
-- `data-view-module`: reference to your application entry point module or template.
+- `src`: reference to `vbjs.js` file. This is usually file `vbjs.js` from distribution package.
+- `data-view-module`: reference to your application entry point module, template or view.
 
 For example: `<script data-view-module="document!id" src="/libs/vbjs/dist/1.1.9/bundle/vbjs.js"></script>`
-
-Note that you can also point `src` attribute reference to library on internet over CDN as shown in previous example above. However, that is raw github CDN which is not very fast (and not really supposed to use like that). Hopefully in future that will change.
-
-There are few more attributes that can be set to your `script` element that help you configure further your application. However, those two should are sufficient for most common scenarios. Almost all of 14 [demos](https://github.com/vbilopav/vbjs/tree/master/demos) are using those two. For more info information on additional attributes please consult [documentation](tbd) or even better directly [source code](https://github.com/vbilopav/vbjs/blob/master/src/vbjs/dev/vbjs.js#L72).
-
 
 ## Examples
 

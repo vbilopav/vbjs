@@ -1,1 +1,0 @@
-define(["sys/template/html","sys/models/test-proto"],(t,e)=>{e(String,["toHTML"]),String.prototype.toHTML=function(){return t.strToElement(this)}});
