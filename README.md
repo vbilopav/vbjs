@@ -33,22 +33,17 @@ Want to display simple data from your back-end endpoint on your page?
   </head>
   <body>
 
-    <div>
-        <template id="data">
-            <ul>
-              ${async () => this.template.forEach(await(await fetch("/endpoint/")).json(), value => `
-                <li>
-                    ${value}
-                </li>
-              `)}
-            </div>
-          </template>
-    </div>
+    <template>
+      <ul>
+        ${async () => this.template.forEach(await(await fetch("/endpoint/")).json(), value => `
+          <li>
+              ${value}
+          </li>
+        `)}
+      </div>
+    </template>
 
-    <script 
-        data-view-module="document!data"
-        src="https://cdn.rawgit.com/vbilopav/vbjs/master/src/vbjs/dist/1.1.9/bundle/vbjs.js">
-    </script>
+    <script src="https://cdn.rawgit.com/vbilopav/vbjs/master/src/vbjs/dist/<version>/bundle/vbjs.js"></script>
 
   </body>
 </html>
@@ -111,9 +106,7 @@ Note that you have to have already npm initialized in directory and package.json
 And after that, all you need to include `script` tag into your start page, usually `index.html` or similar with following attributes:
 
 - `src`: reference to `vbjs.js` file. This is usually file `vbjs.js` from distribution package.
-- `data-view-module`: reference to your application entry point module, template or view.
-
-For example: `<script data-view-module="document!id" src="/libs/vbjs/dist/1.1.9/bundle/vbjs.js"></script>`
+- `data-view-module`: reference to your application entry point module, template or view. This is optional if you use document embedded template (example above).
 
 ## Examples
 

@@ -10,6 +10,7 @@
             appModule: "sys/single-view-app",
             appElementId: "app",
             appObjectName: "_app",
+            loaderUrl: "https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.min.js"
         }
 
     const 
@@ -83,7 +84,8 @@
         appElementId = scr.getAttribute("data-app-container-id") === null ? defaults.appElementId : scr.getAttribute("data-app-container-id"),
         appObjectName = scr.getAttribute("data-app-object-name") || defaults.appObjectName,
         settings = eval("(" + scr.getAttribute("data-settings") + ")") || {},
-        cssFilesattrValue = scr.getAttribute("data-css-files");
+        cssFilesattrValue = scr.getAttribute("data-css-files"),
+        loaderUrl = scr.getAttribute("data-loader-url") || defaults.loaderUrl;
 
     let 
         libsUrl = scr.getAttribute("data-libs-url") === null ? defaults.libsUrl : scr.getAttribute("data-libs-url");
@@ -157,7 +159,7 @@
             script.onerror = onload;
         };
 
-    loadLoader("https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.min.js", () => {
+    loadLoader(loaderUrl, () => {
         if (window.requirejs) {
             configure();
             return;
