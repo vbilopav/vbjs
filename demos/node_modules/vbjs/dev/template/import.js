@@ -1,7 +1,7 @@
 define(["sys/app"], app => {
 
     const
-        preloaded = app.settings.usePreloadedTemplates == true,
+        preloaded = false,
         searchImport = ".import(",
         searchImportLen = searchImport.length,
         parseImportsAsync = text => new Promise(resolve => {

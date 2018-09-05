@@ -82,7 +82,7 @@
         viewModule = scr.getAttribute("data-view-module"),
         appElementId = scr.getAttribute("data-app-container-id") === null ? defaults.appElementId : scr.getAttribute("data-app-container-id"),
         appObjectName = scr.getAttribute("data-app-object-name") || defaults.appObjectName,
-        settings = eval("(" + scr.getAttribute("data-settings") + ")") || {usePreloadedTemplates: false, stripScriptTagsInTemplates: true},
+        settings = eval("(" + scr.getAttribute("data-settings") + ")") || {},
         cssFilesattrValue = scr.getAttribute("data-css-files");
 
     let 

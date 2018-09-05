@@ -1,0 +1,1 @@
+define(["sys/app"],i=>{return{parse:i=>-1===i.indexOf("<s")?i:i.split(/<script>/).join("").split(/<\/script>/).join("")}});

@@ -1,8 +1,10 @@
 define(["sys/app"], app => {
 
+    const stripScriptTagsInTemplates = true;
+    
     return {
         parse: text => {
-            if (!app.settings.stripScriptTagsInTemplates) {
+            if (!stripScriptTagsInTemplates) {
                 return text;
             }
             if (text.indexOf("<s") === -1) {
