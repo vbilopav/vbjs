@@ -102,11 +102,7 @@ npm install --save-dev vbjs
 
 Note that you have to have already npm initialized in directory and package.json created.
 
-
-And after that, all you need to include `script` tag into your start page, usually `index.html` or similar with following attributes:
-
-- `src`: reference to `vbjs.js` file. This is usually file `vbjs.js` from distribution package.
-- `data-view-module`: reference to your application entry point module, template or view. This is optional if you use document embedded template (example above).
+And after that, all you need to include `script` tag into your start page, usually `index.html` or similar with `src` attribute referencing one of `vbjs.js` scripts.
 
 ## Examples
 

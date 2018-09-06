@@ -19,7 +19,6 @@ define([
             if (!entry) {
                 return;
             }
-            found = true;
             const 
                 params = {},
                 wrapper = entry.wrap.createElement();
@@ -288,6 +287,3 @@ define([
         revealComponents: revealComponents
     }
 });
-
-
-
