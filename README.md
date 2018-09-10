@@ -123,7 +123,9 @@ You can track progress for first stable release at [this milestone](https://gith
 
 This is open source project, everybody is welcome to contribute. Let's make something simple and powerful together.
 
-However, is you like what I'm doing and you find it useful, you can support me by buying me beer or pizza. Patreon and Paypal accounts coming soon.
+However, is you like what I'm doing and you find it useful, you can support me by buying me beer or pizza or dinner or trip around the world if you would:
+
+[![Donate me](https://img.shields.io/badge/DONATE-ME-green.svg?longCache=true&style=for-the-badge)](https://www.patreon.com/vbilopav)
 
 ## License
 
