@@ -1,0 +1,1 @@
+define(["sys/models/test-proto"],s=>{s(HTMLElement,["hasClass"]),HTMLElement.prototype.hasClass=function(s){return this.classList?this.classList.contains(s):new RegExp(`(^| )${s}( |$)`,"gi").test(this.className)}});
