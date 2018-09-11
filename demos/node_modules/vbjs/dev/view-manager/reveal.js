@@ -9,6 +9,9 @@ define([
 
 ) => {
 
+    let
+        cssImported = [];
+
     const 
         parseComponentByElement = (e, components, owner) => {
             if (!components.includes(e.nodeName)) {
@@ -61,6 +64,7 @@ define([
             observer.observe(wrapper, {attributes: true, childList: false, subtree: false});
             return {view: entry.src, elementOrId: wrapper, params: params}
         },
+
         revealComponents = (element, instance, owner) => {
             let 
                 components = instance.components;
@@ -102,6 +106,7 @@ define([
             }
             return observer;
         },
+        
         reveal = ({
             id="", 
             view=(()=>{throw view})(), 
@@ -262,8 +267,13 @@ define([
                         delete params.___extra;
                     }
                     
+                    if (options.css && typeof options.css === "string") {
+                        options.css = [options.css];
+                    }
                     if (options.css && options.css.length) {
-
+                        options.css = options.css.filter(value => !cssImported.includes(value));
+                    }
+                    if (options.css && options.css.length) {
                         require(options.css.map(item => item.startsWith("text!") ? item : "text!" + item), (...results) => {
                             document.head.appendChild(
                                 `<style type="text/css">
@@ -272,6 +282,8 @@ define([
                             );
                             return resolveView();
                         });
+
+                        cssImported = options.css.concat(cssImported);
 
                     } else {
                         return resolveView();

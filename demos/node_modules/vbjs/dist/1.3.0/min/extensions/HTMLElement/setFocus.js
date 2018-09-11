@@ -1,1 +1,0 @@
-define(["sys/models/test-proto"],t=>{t(HTMLElement,["setFocus"]),HTMLElement.prototype.setFocus=function(){return this.focus(),this}});

@@ -6,7 +6,7 @@ define([], () => {
 
         constructor({options}) {
             options.context = this;
-            options.css = ["todo-module-components/todo.css", "todo-module-components/todo-item.css"];
+            options.css = "../shared/css/todo.css";
             options.watch();
 
             this.value = "initial";
@@ -17,7 +17,7 @@ define([], () => {
             let index = 0;
             let result = String.html`
                 <div class="ToDo">
-                    <h1 class="ToDo-Header">VBJS template To Do</h1>
+                    <h1 class="ToDo-Header">VBJS To Do demo</h1>
                     <div class="ToDo-Container">
                         <div class="ToDo-Content" id="content">`;
             

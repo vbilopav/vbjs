@@ -90,7 +90,7 @@ This library is hosted on [github](https://github.com/vbilopav/vbjs) and distrib
 For installation from github simply download and clone source code from github, distribution directory (dist) is included.
 
 
-For installation from NPM, just run:
+For installation from npm, just run:
 ```
 npm install -g vbjs
 ```
@@ -100,7 +100,7 @@ That will install library globally, which is fine, but we actually recommend loc
 npm install --save-dev vbjs
 ```
 
-Note that you have to have already NPM initialized in directory and package.json created.
+Note that you have to have already npm initialized in directory and package.json created.
 
 And after that, all you need to include `script` tag into your start page, usually `index.html` or similar with `src` attribute referencing one of `vbjs.js` scripts.
 
@@ -123,7 +123,9 @@ You can track progress for first stable release at [this milestone](https://gith
 
 This is open source project, everybody is welcome to contribute. Let's make something simple and powerful together.
 
-However, is you like what I'm doing and you find it useful, you can support me by buying me beer or pizza. Patreon and Paypal accounts coming soon.
+However, is you like what I'm doing and you find it useful, you can support me by buying me beer or pizza or dinner or trip around the world if you would:
+
+[![Donate me](https://img.shields.io/badge/DONATE-ME-green.svg?longCache=true&style=for-the-badge)](https://www.patreon.com/vbilopav)
 
 ## License
 

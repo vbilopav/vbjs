@@ -1,1 +1,0 @@
-define(["sys/models/test-proto"],t=>{t(String,["html"]),String.html=((t,...r)=>String.raw(t,...r))});

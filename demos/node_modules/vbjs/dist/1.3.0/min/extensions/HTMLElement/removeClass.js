@@ -1,1 +1,0 @@
-define(["sys/models/test-proto"],s=>{s(HTMLElement,["removeClass"]),HTMLElement.prototype.removeClass=function(s){return this.classList?this.classList.remove(s):this.className=this.className.replace(new RegExp(`(^|\\b)${s.split(" ").join("|")}(\\b|$)`,"gi")," "),this}});

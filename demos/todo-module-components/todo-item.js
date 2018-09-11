@@ -2,6 +2,7 @@ define([], () => class {
 
     constructor({options}) {
         options.context = this;
+        options.css = "../shared/css/todo-item.css";
     }
 
     render({params}) {
@@ -19,10 +20,10 @@ define([], () => class {
     }
 
     set id(value) {
-        console.log("id atrribute set to " + value);
+        console.log("id attribute set to " + value);
     } 
 
     set dataIndex(value) {
-        console.log("data-index atrribute set to " + value);
+        console.log("data-index attribute set to " + value);
     } 
 })

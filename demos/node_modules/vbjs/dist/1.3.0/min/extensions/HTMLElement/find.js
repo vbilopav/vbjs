@@ -1,1 +1,0 @@
-define(["sys/models/test-proto","sys/extensions/String/createElement"],e=>{e(HTMLElement,["find"]),HTMLElement.prototype.find=function(e){let t=this.querySelector(e);return t?(t.length=1,t):((t="dummy".createElement()).length=0,t)}});
