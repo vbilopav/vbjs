@@ -7,8 +7,6 @@ define([], () => {
         constructor({options}) {
             options.context = this;
             options.css = "../shared/css/todo.css";
-            options.watch();
-
             this.value = "initial";
             this.count = 0;
         }

@@ -9,12 +9,8 @@ ${
             _app.customElements.define({tag: "todo-item", src: "template!todo-components/todo-item.html"});
 
 
-            // not all templates contain custom tags!
-            // so, inform template to wath it-self for custom components/tags:
-            // this will also include watching any further dom mutation
-            this.template.watch();
 
-            // To optimize template parsing - inform template to wath it-self for only specific custom tags:
+            // To optimize template parsing - inform template to watch it-self for only specific custom tags:
             // this.template.watch("todo-item");
             // this.template.watch("tag-a", "tag-b");
             // etc...

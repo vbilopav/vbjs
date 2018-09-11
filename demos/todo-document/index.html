@@ -39,7 +39,6 @@
               (
                   () => {
                       _app.customElements.define({tag: "todo-item", src: "document!todo-item"});
-                      this.template.watch();
                       this.template.context = {
                         input: "initial value",
                         createNewToDoItem: () => this.template.model.content.insertAdjacentHTML(
@@ -71,7 +70,7 @@
         </template>
     </div>
 
-    <script type="module" src="../node_modules/vbjs/dist/1.3.2/bundle/vbjs.js"></script>
+    <script type="module" src="../node_modules/vbjs/dist/1.3.3/bundle/vbjs.js"></script>
 
   </body>
 </html>

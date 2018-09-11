@@ -68,6 +68,9 @@ define([
         revealComponents = (element, instance, owner) => {
             let 
                 components = instance.components;
+            if (components === null) {
+                components = getTags();
+            }
             if (!components || !components.length) {
                 return;
             }

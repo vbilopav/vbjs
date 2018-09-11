@@ -71,7 +71,7 @@ Additionally I recommend to using `type="module"` in your script tag. This will 
 Typical example would be:
 
 ```html
-<script type="module" data-view-module="template!my-view-template.html" src="../node_modules/vbjs/dist/1.3.0/bundle/vbjs.js"></script>
+<script type="module" data-view-module="template!my-view-template.html" src="../node_modules/vbjs/dist/1.3.3/bundle/vbjs.js"></script>
 ```
 
 ## About view types and view modules
