@@ -69,7 +69,7 @@ define(["sys/extensions/HTMLElement/forEachChild"], () => class {
             element.removeAttribute(attr);
             const instance = this._instance;
             element.on(attr.replace("on", "").toLowerCase(), function() {
-                val.call(instance);
+                val.call(instance, ...arguments);
             });
         }
     }
