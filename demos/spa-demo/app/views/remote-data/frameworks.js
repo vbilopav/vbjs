@@ -1,8 +1,4 @@
 define([], () => class {
-     
-    constructor({options}) {
-        options.context = this;
-    }
 
     render() { 
         return String.html`

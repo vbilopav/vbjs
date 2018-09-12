@@ -16,6 +16,7 @@ define([
     "extension!Window/off",
     "sys/extensions/HTMLElement/addClass",
     "sys/extensions/HTMLElement/removeClass",
+    "sys/extensions/HTMLElement/attr",
     "sys/template/parser",
     "sys/view-manager/components"
 

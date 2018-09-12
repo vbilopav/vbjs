@@ -1,7 +1,6 @@
 define([], () => class {
 
     constructor({options}) {
-        options.context = this;
         options.css = "../shared/css/todo-item.css";
     }
 

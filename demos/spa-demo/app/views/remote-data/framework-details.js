@@ -1,9 +1,5 @@
 define([], () => class {
 
-    constructor({options}) {
-        options.context = this;
-    }
-     
     render({params}) {
         let name = params.value;
         return String.html`

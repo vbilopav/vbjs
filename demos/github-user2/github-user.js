@@ -2,7 +2,6 @@ define([], () => class {
 
     constructor({options}) {
         this.username = "vbilopav"; // default value for the model element username
-        options.context = this; // when context object is available, model will be automatically binded and assigned to instance
     }
 
     render() {

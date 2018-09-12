@@ -1,7 +1,6 @@
 define([], () => class {
 
     constructor({options}) {
-        options.context = this;
         this.username = "vbilopav"; // default value for the model element username
     }
 

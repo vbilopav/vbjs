@@ -5,7 +5,6 @@ define([], () => {
     return class {
 
         constructor({options}) {
-            options.context = this;
             options.css = "../shared/css/todo.css";
             this.value = "initial";
             this.count = 0;
