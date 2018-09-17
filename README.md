@@ -40,6 +40,7 @@ Want to display simple data from your back-end endpoint on your page?
               ${value}
           </li>
         `)}
+       </ul>
     </template>
 
     <script src="https://cdn.rawgit.com/vbilopav/vbjs/master/src/vbjs/dist/<version>/bundle/vbjs.js"></script>
