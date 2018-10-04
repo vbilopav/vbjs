@@ -40,6 +40,7 @@ Want to display simple data from your back-end endpoint on your page?
               ${value}
           </li>
         `)}
+        </ul>
       </div>
     </template>
 
