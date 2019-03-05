@@ -1,1 +1,0 @@
-define(["sys/models/test-proto","sys/extensions/HTMLElement/css"],i=>{i(HTMLElement,["visible"]),HTMLElement.prototype.visible=function(i){return void 0===i||i?(this.css("visibility","visible"),this):this.css("visibility","hidden")}});

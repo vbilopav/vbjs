@@ -1,1 +1,0 @@
-define(["sys/models/test-proto"],e=>{e(HTMLElement,["off"]),HTMLElement.prototype.off=function(e,t){for(let o of e.split(" "))this.removeEventListener(o,t);return this}});

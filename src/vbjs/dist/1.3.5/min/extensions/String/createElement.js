@@ -1,1 +1,0 @@
-define(["sys/template/html","sys/models/test-proto"],(t,e)=>{e(String,["createElement"]),String.prototype.createElement=function(e,n){return t.tagToElement(this,e,n)}});

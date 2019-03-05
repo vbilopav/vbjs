@@ -1,1 +1,0 @@
-define(["module","sys/template/parser","sys/template/import","sys/template/tags"],(e,s,t,a)=>({version:"1.0.0",load(e,p,r){p(["text!"+e],p=>t.parseImportsAsync(p).then(()=>r((t,r)=>s.parseTemplate(a.parse(p),t,r,e))))}}));

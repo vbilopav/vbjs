@@ -1,1 +1,0 @@
-define(["sys/models/test-proto"],t=>{t(HTMLElement,["forEachChild"]),HTMLElement.prototype.forEachChild=function(t=(()=>{}),e=!1){e&&t(this);for(let e=0,h=this.children.length;e<h;e++)this.children[e].forEachChild(t,!0);return this}});
