@@ -10,4 +10,3 @@ exec.stderr.on('data', data => {
     console.log(data)
 });
 exec.on('exit', data => console.log(data));
-  
