@@ -6,10 +6,10 @@ define(["sys/spa/router", "sys/spa/view-manager"], (Router, Manager) => appEleme
     new Router({
         routes: {
             "/": {
-                view: "template!github-user-template/github-user.html"
+                view: "template!demos/github-user-template/github-user.html"
             },
             "/github-user-info": {
-                view: "template!github-user-template/github-user-info.html",
+                view: "template!demos/github-user-template/github-user-info.html",
                 paramsMap: params => (params.length === 1 ? params[0] : false)
             }
         },

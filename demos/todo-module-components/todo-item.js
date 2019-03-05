@@ -1,7 +1,7 @@
 define([], () => class {
 
     constructor({options}) {
-        options.css = "../shared/css/todo-item.css";
+        options.css = "demos/shared/css/todo-item.css";
     }
 
     render({params}) {

@@ -1,7 +1,7 @@
 ${
 <script>
     // render css files
-    this.template.css.import("../shared/css/todo.css", "../shared/css/todo-item.css")
+    this.template.css.import("demos/shared/css/todo.css", "demos/shared/css/todo-item.css")
 </script>
 }
 
@@ -10,7 +10,7 @@ ${
     // constructor in self-execute func, set initial values and load additional templates
     (() => {
         // load additional templates
-        [this.item] = this.template.import("composite!todo-template1/todo-item.html")();
+        [this.item] = this.template.import("composite!demos/todo-template1/todo-item.html")();
         // set initial values
         this.list = ["clean the house", "buy milk"];
         this.value = "initial";

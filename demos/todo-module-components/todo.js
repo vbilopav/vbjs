@@ -1,11 +1,11 @@
 define([], () => {
 
-    _app.customElements.define({tag: "todo-item", src: "todo-module-components/todo-item"});
+    _app.customElements.define({tag: "todo-item", src: "demos/todo-module-components/todo-item"});
 
     return class {
 
         constructor({options}) {
-            options.css = "../shared/css/todo.css";
+            options.css = "demos/shared/css/todo.css";
             this.value = "initial";
             this.count = 0;
         }
