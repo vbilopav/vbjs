@@ -1,1 +1,0 @@
-define(["module"],()=>({version:"1.0.0",load(e,t,n){fetch(t.toUrl(e)).then(e=>e.text()).then(e=>n(e))}}));
