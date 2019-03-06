@@ -26,10 +26,6 @@ define(["todo-module/todo-item"], Item => class {
         ];
     }
 
-    rendered({element}) {
-        this.model.bind(element, this);
-    }
-
     createNewToDoItem() {
         this.model.content.append(
             this.item.render({params: this.model.input.value}).toHTML()
