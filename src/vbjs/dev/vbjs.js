@@ -87,6 +87,10 @@
         cssFilesattrValue = scr.getAttribute("data-css-files"),
         loaderUrl = scr.getAttribute("data-loader-url") || defaults.loaderUrl;
 
+    if (!appUrl.startsWith("/")) {
+        appUrl = "/" + appUrl;
+    }
+
     let 
         libsUrl = scr.getAttribute("data-libs-url") === null ? defaults.libsUrl : scr.getAttribute("data-libs-url");
 
@@ -153,7 +157,7 @@
             let script = document.createElement("script");
             script.async = true;
             script.src = src;
-            script.setAttribute("data-main", "sys/main")
+            script.setAttribute("data-main", "sys/main");
             document.body.appendChild(script);
             script.onload = onload;
             script.onerror = onload;
